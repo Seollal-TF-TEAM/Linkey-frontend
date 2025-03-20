@@ -11,7 +11,7 @@ import {
     Card
 } from '@mantine/core';
 
-function ProjectPage() {
+function TeamPage() {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -87,9 +87,9 @@ function ProjectPage() {
 
             {/* 메인 콘텐츠 영역 */}
             <AppShell.Main>
-                <div style={{ display: 'flex', alignItems: 'flex-start', padding: '16px' }}>
-                    <Title order={1} mb="lg" style={{ position: 'absolute', top: 16, left: 250 }}>
-                        Project
+                <div style={{ position: 'absolute', top: 16, left: 250 }}>
+                    <Title order={1} mb="lg">
+                        Team
                     </Title>
                 </div>
 
@@ -110,14 +110,13 @@ function ProjectPage() {
                         {[...Array(5)].map((_, index) => (
                             <Card shadow="sm" p="xl" key={index} style={{ height: '200px', top:'100px', width: '300px' }}>
                                 <Text weight="bold" mb="xs">
-                                    Project name
+                                    Team name
                                 </Text>
                                 <Text size="sm" color="dimmed" mb="md">
-                                    Project description
+                                    Team description
                                     <br />
                                     - test added djslak 2.5
                                 </Text>
-                                <Button variant="filled">Button</Button>
                             </Card>
                         ))}
                     </SimpleGrid>
@@ -127,4 +126,4 @@ function ProjectPage() {
     );
 }
 
-export default ProjectPage;
+export default TeamPage;
