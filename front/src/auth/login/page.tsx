@@ -42,6 +42,7 @@ const GitHubLoginPage: React.FC = () => {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <h1>GitHub OAuth 로그인</h1>
             <Button
+                variant="light" color="#545454"
                 onClick={handleLogin}
             >
                 GitHub으로 로그인

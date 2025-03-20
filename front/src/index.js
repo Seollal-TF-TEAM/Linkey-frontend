@@ -7,12 +7,9 @@ import { MantineProvider } from "@mantine/core";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-    <html>
-        <body>
-            <MantineProvider withGlobalStyles withNormalizeCSS>
-                <App/>
-            </MantineProvider>
-        </body>
-    </html>
+    <React.StrictMode>
+        <MantineProvider withGlobalStyles withNormalizeCSS>
+            <App />
+        </MantineProvider>
+    </React.StrictMode>
 );
