@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
+import {Button} from "@mantine/core";
 
 const GitHubLoginPage: React.FC = () => {
     // GitHub OAuth 설정
@@ -40,20 +41,20 @@ const GitHubLoginPage: React.FC = () => {
     return (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <h1>GitHub OAuth 로그인</h1>
-            <button
+            <Button
                 onClick={handleLogin}
-                style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#24292e',
-                    border: 'none',
-                    color: 'white',
-                    cursor: 'pointer',
-                    fontSize: '16px',
-                    borderRadius: '5px',
-                }}
+                // style={{
+                //     padding: '10px 20px',
+                //     backgroundColor: '#24292e',
+                //     border: 'none',
+                //     color: 'white',
+                //     cursor: 'pointer',
+                //     fontSize: '16px',
+                //     borderRadius: '5px',
+                // }}
             >
                 GitHub으로 로그인
-            </button>
+            </Button>
         </div>
     );
 };
