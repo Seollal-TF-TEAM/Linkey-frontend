@@ -54,7 +54,7 @@ function ProjectPage() {
 
                     {/* 메뉴 */}
                     <div style={{ marginBottom: 40 }}>
-                        {['/dashboard', '/project', '/team'].map((path, index) => (
+                        {['/project', '/team'].map((path, index) => (
                             <Button
                                 key={index}
                                 variant="subtle"
