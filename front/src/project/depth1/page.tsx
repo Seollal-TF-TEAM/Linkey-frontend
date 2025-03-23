@@ -12,7 +12,7 @@ import {
 } from '@mantine/core';
 import {useDisclosure} from "@mantine/hooks";
 // @ts-ignore
-import AddProjectDrawer from '../../auth/login/Components/AddProjectDrawer.tsx'
+import AddProjectDrawer from '../main/components/AddProjectDrawer.tsx'
 
 
 function ProjectPage() {
