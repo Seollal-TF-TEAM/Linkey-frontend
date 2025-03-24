@@ -4,8 +4,8 @@ import axios from 'axios';
 const GitHubLoginPage: React.FC = () => {
     // GitHub OAuth 설정
     const clientId = 'Ov23liQoOCN40W8vsEU0'; // GitHub에서 발급받은 Client ID
-    const redirectUri = 'linkey.co.kr/callback'; // 리디렉션될 URL (프론트엔드)
-    const backendUri = 'linkey.co.kr/api/auth/github/callback'; // 백엔드 API
+    const redirectUri = 'https://linkey.co.kr/callback'; // 리디렉션될 URL (프론트엔드)
+    const backendUri = 'https://linkey.co.kr/api/auth/github/callback'; // 백엔드 API
     const scope = 'read:user user:email';
     const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize';
 
