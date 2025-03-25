@@ -20,7 +20,7 @@ const protectedRoutes = [
     { path: '/project/depth1', component: ProjectDepth1Page },
     { path: '/project/:projectId', component: ProjectDetailPage },
     { path: '/sprint/:sprintId', component: SprintPage },
-    { path: '/team', component: TeamPage },
+    { path: '/team', component: CreateTeamPage },
     { path: '/team/create', component: CreateTeamPage },
     { path: '/team/depth1', component: TeamDepth1Page },
 ];
@@ -41,6 +41,14 @@ function App() {
                 element={<ProtectedRoute component={Component} />}
             />
             ))}
+                
+            {/* /project/:projectId/sprint/:sprintId 네스팅 경로 추가 */}
+            <Route path="/project/:projectId">
+            <Route
+                path="sprint/:sprintId"
+                element={<ProtectedRoute component={SprintPage} />}
+            />
+            </Route>
 
             {/* 404 페이지 */}
             <Route path="*" element={<NotFoundPage />} />
