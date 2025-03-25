@@ -20,11 +20,24 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.13.1'  # React에 적합한 버전 (필요 시 조정)
+          node-version: '20'  # React에 적합한 버전 (필요 시 조정)
 
       # 의존성 설치 및 빌드
       - name: Install dependencies
         run: npm ci
+
+      - name: Debug environment variables
+        run: |
+          echo "REACT_APP_GITHUB_CLIENT_ID: $REACT_APP_GITHUB_CLIENT_ID"
+          echo "REACT_APP_REDIRECT_URI: $REACT_APP_REDIRECT_URI"
+          echo "REACT_APP_BACKEND_URI: $REACT_APP_BACKEND_URI"
+          echo "REACT_APP_BASE_URL: $REACT_APP_BASE_URL"
+        env:
+          REACT_APP_GITHUB_CLIENT_ID: ${{ secrets.REACT_APP_GITHUB_CLIENT_ID }}
+          REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
+          REACT_APP_BACKEND_URI: ${{ secrets.REACT_APP_BACKEND_URI }}
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+      
       - name: Build
         run: CI=false npm run build
         env:
@@ -32,8 +45,11 @@ jobs:
           REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
           REACT_APP_BACKEND_URI: ${{ secrets.REACT_APP_BACKEND_URI }}
           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
-
-      # SHA 앞 7자 추출
+      
+      - name: Check build output
+        run: grep -r "REACT_APP_GITHUB_CLIENT_ID" build/ || echo "Not found in build"
+      
+        # SHA 앞 7자 추출
       - name: Extract short SHA
         id: vars
         run: echo "sha_short=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
