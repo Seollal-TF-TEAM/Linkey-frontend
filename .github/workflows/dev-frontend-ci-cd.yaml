@@ -44,9 +44,8 @@ jobs:
           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
       - name: Check build contents
         run: |
-          find build/ -type f -name "*.js" -exec grep -H "Ov23liQoOCN40W8vsEU0" {} \; || echo "Client ID not found in build"
-      
-        # SHA 앞 7자 추출
+          find build/ -type f -name "*.js" -exec grep -H "Ov23liQoOCN40W8vsEU0" {} \; || echo "Client ID not found in build"      
+      # SHA 앞 7자 추출
       - name: Extract short SHA
         id: vars
         run: echo "sha_short=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
