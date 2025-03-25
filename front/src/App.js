@@ -14,7 +14,6 @@ function App() {
                 <Route path="/project" element={<ProjectPage />} />
                 <Route path="/project/:projectId" element={<ProjectDetailPage />} />
                 <Route path="/team" element={<TeamPage />} />
-                <Route path="/sprint/:sprintId" element={<SprintPage />} />
             </Routes>
         </BrowserRouter>
     );
