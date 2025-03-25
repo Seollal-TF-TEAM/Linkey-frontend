@@ -9,7 +9,7 @@ const GitHubLoginPage: React.FC = () => {
     const backendUri = process.env.REACT_APP_BACKEND_URI; // 백엔드 API 
     const scope = 'read:user user:email';
     const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize';
-
+    console.log(clientId, redirectUri, backendUri)
     // GitHub 로그인 버튼 클릭 핸들러
     const handleLogin = () => {
         const url = `${githubAuthorizeUrl}?client_id=${clientId}&redirect_uri=${encodeURIComponent(
