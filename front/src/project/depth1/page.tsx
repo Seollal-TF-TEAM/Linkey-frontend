@@ -26,18 +26,13 @@ function ProjectPage() {
         }
     };
 
-    const handleProjectClick = () => {
-        // navigate(`/project/${project.id}`);
-        navigate(`/project/1`);
-    }
-
     return (
-        <>
+    <>
 
-            {/* 프로젝트 추가 사이드 페이지 컴포넌트 */}
-            <AddProjectDrawer opened={opened} close={close} />
+        {/* 프로젝트 추가 사이드 페이지 컴포넌트 */}
+        <AddProjectDrawer opened={opened} close={close} />
 
-            <AppShell
+        <AppShell
                 padding="md"
                 navbar={{ width: 220, breakpoint: 'sm' }}
                 styles={(theme) => ({
@@ -101,7 +96,6 @@ function ProjectPage() {
                     </div>
                 </AppShell.Navbar>
 
-
                 {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>
                     <div style={{ display: 'flex', alignItems: 'flex-start', padding: '16px' }}>
@@ -134,7 +128,7 @@ function ProjectPage() {
                                         <br />
                                         - test added djslak 2.5
                                     </Text>
-                                    <Button variant="light" color="#545454" onClick={handleProjectClick}>View Details</Button>
+                                    <Button variant="light" color="#545454" >Button</Button>
                                 </Card>
                             ))}
                         </SimpleGrid>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDisclosure } from '@mantine/hooks';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
     AppShell,
@@ -9,14 +10,12 @@ import {
     Title,
     SimpleGrid,
     Card,
+    Drawer, TextInput, Flex, MultiSelect
 } from '@mantine/core';
-import {useDisclosure} from "@mantine/hooks";
-// @ts-ignore
-import AddProjectDrawer from '../main/components/AddProjectDrawer.tsx'
 
-
-function ProjectPage() {
+function TeamPage() {
     const [opened, { open, close }] = useDisclosure(false);
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -26,16 +25,20 @@ function ProjectPage() {
         }
     };
 
-    const handleProjectClick = () => {
-        // navigate(`/project/${project.id}`);
-        navigate(`/project/1`);
-    }
-
     return (
         <>
+            {/* 새 팀 생성용 사이드 페이지 */}
+            <Drawer
+                opened={opened}
+                onClose={close}
+                position="right"
+                title="Authentication"
+                size="xl" >
+                <Text> 흠 ㅋㅋ </Text>
+            </Drawer>
 
-            {/* 프로젝트 추가 사이드 페이지 컴포넌트 */}
-            <AddProjectDrawer opened={opened} close={close} />
+
+
 
             <AppShell
                 padding="md"
@@ -49,7 +52,6 @@ function ProjectPage() {
                     },
                 })}
             >
-
                 {/* Navbar 영역 */}
                 <AppShell.Navbar p="md" style={{ backgroundColor: '#f3f3f3' }}>
                     {/* 로고 */}
@@ -101,19 +103,65 @@ function ProjectPage() {
                     </div>
                 </AppShell.Navbar>
 
-
                 {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', padding: '16px' }}>
-                        <Title order={1} mb="lg" style={{ position: 'absolute', top: 16, left: 250 }}>
-                            Project
-                        </Title>
-                    </div>
+                    <Center>
+                        <div style={{ position: 'absolute', top: 16, left: 250 }}>
+                            <Title order={1} mb="lg">
+                                Team
+                            </Title>
+                        </div>
+
+                        <SimpleGrid cols={3} spacing="lg" verticalSpacing="xs">
+                            <Flex  ml={400} mt={140} w={600} direction="column">
+                                {/* Team name */}
+                                <Flex gap="md" align="flex-end" mb={30}>
+                                    <TextInput
+                                        size="md"
+                                        label="Team Name"
+                                        placeholder="Team Name"
+                                        style={{ flex: 9 }}
+                                    />
+                                </Flex>
+
+                                {/* select DB user for team members */}
+                                <Flex gap="md" align="flex-end" mb={30}>
+                                    <MultiSelect
+                                        size="md"
+                                        label="Select Team Members"
+                                        placeholder="Choose your team members"
+                                        style={{ flex: 9 }}
+                                        data={['은정', '정현', '원호', '대연', '민지', '홍찬', '슬기']}
+                                        searchable
+                                    />
+                                </Flex>
+                                <Flex w={100} ml={500}>
+                                    <Button
+                                        variant="filled"
+                                        color="#545454"
+                                        size="md"
+                                        style={{ flex: 1 }}
+                                        mt={20}
+                                    >
+                                        Edit
+                                    </Button>
+                                </Flex>
+                            </Flex>
+                        </SimpleGrid>
+                    </Center>
+
+
 
                     <Center>
-                        <SimpleGrid cols={3} spacing="lg">
 
-                            {/* 새 프로젝트 생성용 카드 (+) */}
+                        {/*<div style={{ position: 'static', top: 16, left: 250 }}>*/}
+                        {/*    <Title order={1} mb="lg">*/}
+                        {/*        My Team*/}
+                        {/*    </Title>*/}
+                        {/*</div>*/}
+
+                        <SimpleGrid cols={4} spacing="lg" verticalSpacing="xs" mt={70}>
+                            {/* 새 팀 생성용 카드 (+) */}
                             <Card
                                 shadow="sm"
                                 p="xl"
@@ -123,18 +171,16 @@ function ProjectPage() {
                                 <Button variant="transparent" color="#545454" size="xl" onClick={open}>+</Button>
                             </Card>
 
-                            {/* 기존 프로젝트 카드 (5개 예시) */}
-                            {[...Array(5)].map((_, index) => (
-                                <Card shadow="sm" p="xl" key={index} style={{ height: '200px', top:'100px', width: '300px' }}>
+                            {/* 기존 팀 카드 (3개 예시) */}
+                            {[...Array(3)].map((_, index) => (
+                                <Card shadow="sm" p="xl" key={index} style={{ height: '200px', top:'100px', width: '200px' }}>
                                     <Text weight="bold" mb="xs">
-                                        Project name
+                                        Team name
                                     </Text>
                                     <Text size="sm" color="dimmed" mb="md">
-                                        Project description
-                                        <br />
-                                        - test added djslak 2.5
+                                        Team description
                                     </Text>
-                                    <Button variant="light" color="#545454" onClick={handleProjectClick}>View Details</Button>
+                                    <Button variant="light" color="#545454" >Button</Button>
                                 </Card>
                             ))}
                         </SimpleGrid>
@@ -145,4 +191,4 @@ function ProjectPage() {
     );
 }
 
-export default ProjectPage;
+export default TeamPage;
