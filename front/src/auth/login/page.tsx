@@ -11,8 +11,6 @@ const GitHubLoginPage: React.FC = () => {
     const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize';
     const navigate = useNavigate();
 
-    console.log(clientId, redirectUri, backendUri);
-
     const handleLogin = () => {
         const url = `${githubAuthorizeUrl}?client_id=${clientId}&redirect_uri=${encodeURIComponent(
             redirectUri
@@ -25,12 +23,10 @@ const GitHubLoginPage: React.FC = () => {
         const code = params.get('code');
 
         if (code) {
-            console.log('GitHub OAuth Code:', code);
             axios
                 .get(`${backendUri}?code=${code}`)
                 .then((res) => {
-                    console.log('User Data:', res.data);
-                    localStorage.setItem('token', res.data.token);
+                    sessionStorage.setItem('githubUserId', res.data.user.githubUserId)
                     navigate('/project');
                 })
                 .catch((err) => console.error('GitHub Login Error:', err));
