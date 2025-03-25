@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Button } from "@mantine/core";
-import { useNavigate } from 'react-router-dom'; // 추가
+import { useNavigate } from 'react-router-dom';
 
 const GitHubLoginPage: React.FC = () => {
     const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
@@ -9,8 +9,9 @@ const GitHubLoginPage: React.FC = () => {
     const backendUri = process.env.REACT_APP_BACKEND_URI;
     const scope = 'read:user user:email';
     const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize';
-    const navigate = useNavigate(); // 추가
+    const navigate = useNavigate();
 
+    console.log(clientId, redirectUri, backendUri);
 
     const handleLogin = () => {
         const url = `${githubAuthorizeUrl}?client_id=${clientId}&redirect_uri=${encodeURIComponent(
@@ -30,7 +31,7 @@ const GitHubLoginPage: React.FC = () => {
                 .then((res) => {
                     console.log('User Data:', res.data);
                     localStorage.setItem('token', res.data.token);
-                    navigate('/project'); // window.location.href 대신 사용
+                    navigate('/project');
                 })
                 .catch((err) => console.error('GitHub Login Error:', err));
         }

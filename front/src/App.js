@@ -14,6 +14,7 @@ function App() {
                 <Route path="/project" element={<ProjectPage />} />
                 <Route path="/project/:projectId" element={<ProjectDetailPage />} />
                 <Route path="/team" element={<TeamPage />} />
+                <Route path="/callback" element={<GitHubLoginPage />} />
             </Routes>
         </BrowserRouter>
     );
