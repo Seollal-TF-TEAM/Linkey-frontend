@@ -7,6 +7,7 @@ const GitHubLoginPage: React.FC = () => {
     const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
     const redirectUri = process.env.REACT_APP_REDIRECT_URI;
     const backendUri = process.env.REACT_APP_BACKEND_URI;
+    const baseUri = process.env.REACT_APP_BASE_URL;
     const scope = 'read:user user:email';
     const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize';
     const navigate = useNavigate();
@@ -21,12 +22,30 @@ const GitHubLoginPage: React.FC = () => {
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
+        const githubUserId = sessionStorage.getItem('githubUserId');
+
+        if (githubUserId) {
+            axios
+                .get(`${baseUri}/auth/github/exists/${githubUserId}`)
+                .then((res) => {
+                    if (res.data.exists) {
+                        navigate('/project'); // 로그인 상태면 /project로
+                    } else {
+                        sessionStorage.removeItem('githubUserId'); // 유효하지 않으면 세션 정리
+                    }
+                })
+                .catch((err) => {
+                    console.error('Login Check Error:', err);
+                    sessionStorage.removeItem('githubUserId');
+                });
+        }
 
         if (code) {
             axios
                 .get(`${backendUri}?code=${code}`)
                 .then((res) => {
-                    sessionStorage.setItem('githubUserId', res.data.user.githubUserId)
+                    const userId = res.data.user.githubUserId;
+                    sessionStorage.setItem('githubUserId', userId);
                     navigate('/project');
                 })
                 .catch((err) => console.error('GitHub Login Error:', err));
