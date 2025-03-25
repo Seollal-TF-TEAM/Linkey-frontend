@@ -20,6 +20,7 @@ const protectedRoutes = [
     { path: '/project/depth1', component: ProjectDepth1Page },
     { path: '/project/:projectId', component: ProjectDetailPage },
     { path: '/sprint/:sprintId', component: SprintPage },
+    { path: '/team', component: TeamPage },
     { path: '/team/create', component: CreateTeamPage },
     { path: '/team/depth1', component: TeamDepth1Page },
 ];
