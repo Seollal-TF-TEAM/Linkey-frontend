@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://linkey.co.kr/api'; // 실제 Spring Boot 서버 주소
+const BASE_URL = process.env.REACT_APP_BASE_URL; // 실제 Spring Boot 서버 주소
 
 export async function getProjects() {
     const response = await axios.get(`${BASE_URL}/getUserProjects`);
