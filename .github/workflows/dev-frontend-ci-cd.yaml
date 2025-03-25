@@ -25,13 +25,13 @@ jobs:
       # 의존성 설치 및 빌드
       - name: Install dependencies
         run: npm ci
+      - name: Build
+        run: CI=false npm run build
         env:
           REACT_APP_GITHUB_CLIENT_ID: ${{ secrets.REACT_APP_GITHUB_CLIENT_ID }}
           REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
           REACT_APP_BACKEND_URI: ${{ secrets.REACT_APP_BACKEND_URI }}
           REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
-      - name: Build
-        run: CI=false npm run build
 
       # SHA 앞 7자 추출
       - name: Extract short SHA
