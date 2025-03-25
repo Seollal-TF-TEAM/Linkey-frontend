@@ -1,47 +1,57 @@
 import './App.css';
-import GitHubLoginPage from './auth/login/page.tsx';
-import ProjectMainPage from './project/main/page.tsx';
-import TeamDepth1Page from './team/depth1/page.tsx';
-import ProjectDetailPage from './project/[projectId]/page.tsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SprintPage from './sprint/[sprintId]/page.tsx';
+import GitHubLoginPage from './auth/login/page.tsx';
 import NotFoundPage from './error/404Page.tsx';
 import withAuth from './components/withAuth.tsx';
-import MainPage from './main/page.tsx';
-import CreateTeamPage from './team/createTeam/page.tsx';
-import ProjectDepth1Page from './project/depth1/page.tsx';
 
-// 보호된 페이지에 withAuth 적용
-const ProtectedMainPage = withAuth(MainPage);
-const ProtectedProjectDetailPage = withAuth(ProjectDetailPage);
-const ProtectedSprintPage = withAuth(SprintPage);
-const ProtectedCreateTeamPage = withAuth(CreateTeamPage);
-const ProtectedTeamDepth1Page = withAuth(TeamDepth1Page);
-const ProtectedProjectDepth1Page = withAuth(ProjectDepth1Page);
-const ProtectedProjectMainPage = withAuth(ProjectMainPage);
+// 페이지 컴포넌트 임포트
+import MainPage from './main/page.tsx';
+import ProjectMainPage from './project/main/page.tsx';
+import ProjectDepth1Page from './project/depth1/page.tsx';
+import ProjectDetailPage from './project/[projectId]/page.tsx';
+import SprintPage from './sprint/[sprintId]/page.tsx';
+import CreateTeamPage from './team/createTeam/page.tsx';
+import TeamDepth1Page from './team/depth1/page.tsx';
+
+// 보호된 페이지에 withAuth 적용 (한 번에 정의)
+const protectedRoutes = [
+    { path: '/main', component: MainPage },
+    { path: '/project', component: ProjectMainPage },
+    { path: '/project/depth1', component: ProjectDepth1Page },
+    { path: '/project/:projectId', component: ProjectDetailPage },
+    { path: '/sprint/:sprintId', component: SprintPage },
+    { path: '/team/create', component: CreateTeamPage },
+    { path: '/team/depth1', component: TeamDepth1Page },
+];
 
 function App() {
     return (
         <BrowserRouter>
-            <Routes>
-                {/* 로그인 페이지 */}
-                <Route path="/" element={<GitHubLoginPage />} />
-                <Route path="/callback" element={<GitHubLoginPage />} /> {/* 콜백 경로 추가 */}
+        <Routes>
+            {/* 공개 경로 */}
+            <Route path="/" element={<GitHubLoginPage />} />
+            <Route path="/callback" element={<GitHubLoginPage />} />
 
-                {/* 보호된 페이지 */}
-                <Route path="/main" element={<ProtectedMainPage />} />
-                <Route path="/project/:projectId" element={<ProtectedProjectDetailPage />} />
-                <Route path="/sprint/:sprintId" element={<ProtectedSprintPage />} />
-                <Route path="/team/create" element={<ProtectedCreateTeamPage />} />
-                <Route path="/team/depth1" element={<ProtectedTeamDepth1Page />} />
-                <Route path="/project/depth1" element={<ProtectedProjectDepth1Page />} />
-                <Route path="/project" element={<ProtectedProjectMainPage />} />
+            {/* 보호된 경로 그룹화 */}
+            {protectedRoutes.map(({ path, component: Component }) => (
+            <Route
+                key={path}
+                path={path}
+                element={<ProtectedRoute component={Component} />}
+            />
+            ))}
 
-                {/* 404 페이지 */}
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
+            {/* 404 페이지 */}
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
         </BrowserRouter>
     );
 }
+
+// 보호된 라우트를 위한 재사용 가능한 컴포넌트
+const ProtectedRoute = ({ component: Component }) => {
+    const ProtectedComponent = withAuth(Component);
+    return <ProtectedComponent />;
+};
 
 export default App;
