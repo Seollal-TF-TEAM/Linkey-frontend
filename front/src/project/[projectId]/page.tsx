@@ -24,7 +24,7 @@ function ProjectDetailPage() {
 
     // navigate to sprint detail page
     const handleSprintClick = (sprintId) => {
-        navigate(`/sprint/${sprints[0].id}`);
+        navigate(`${window.location.pathname}/sprint/${sprints[0].id}`);
     };
 
 

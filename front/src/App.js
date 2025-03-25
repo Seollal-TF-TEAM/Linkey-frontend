@@ -13,6 +13,7 @@ function App() {
                 <Route path="/login" element={<GitHubLoginPage />} />
                 <Route path="/project" element={<ProjectPage />} />
                 <Route path="/project/:projectId" element={<ProjectDetailPage />} />
+                <Route path="/project/:projectId/sprint/:sprintId" element={<SprintPage />} />
                 <Route path="/team" element={<TeamPage />} />
                 <Route path="/callback" element={<GitHubLoginPage />} />
             </Routes>
