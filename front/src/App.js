@@ -6,7 +6,7 @@ import ProjectDetailPage from "./project/[projectId]/page.tsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import SprintPage from "./sprint/[sprintId]/page.tsx";
 import NotFoundPage from "./error/404Page.tsx";
-import withAuth from './components/withAuth';
+import withAuth from './components/withAuth.tsx';
 
 // 보호된 페이지에 withAuth 적용
 const ProtectedMainPage = withAuth(MainPage);
