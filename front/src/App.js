@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GitHubLoginPage from './auth/login/page.tsx';
 import NotFoundPage from './error/404Page.tsx';
 import withAuth from './components/withAuth.tsx';
+import TeamPage from "./team/depth1/page.tsx";
 
 // 페이지 컴포넌트 임포트
 import MainPage from './main/page.tsx';
@@ -20,7 +21,7 @@ const protectedRoutes = [
     { path: '/project/depth1', component: ProjectDepth1Page },
     { path: '/project/:projectId', component: ProjectDetailPage },
     { path: '/sprint/:sprintId', component: SprintPage },
-    { path: '/team', component: CreateTeamPage },
+    { path: '/team', component: TeamPage },
     { path: '/team/create', component: CreateTeamPage },
     { path: '/team/depth1', component: TeamDepth1Page },
 ];
