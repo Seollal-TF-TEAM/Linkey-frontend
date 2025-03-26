@@ -83,7 +83,7 @@ function AddProjectDrawer({ opened, close }) {
                         label="Add Team"
                         placeholder="Choose your team members"
                         style={{ flex: 9 }}
-                        data={['은정', '정현', '원호', '대연']}
+                        data={['은정', '정현', '원호', '대연', '태규']}
                         searchable
                     />
                     <Button

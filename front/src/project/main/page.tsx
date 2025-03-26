@@ -13,6 +13,8 @@ import {
 import {useDisclosure} from "@mantine/hooks";
 // @ts-ignore
 import AddProjectDrawer from '../main/components/AddProjectDrawer.tsx'
+// @ts-ignore
+import NavbarComponent from "../../components/layout/Navbar.tsx";
 
 
 function ProjectPage() {
@@ -51,56 +53,7 @@ function ProjectPage() {
             >
 
                 {/* Navbar 영역 */}
-                <AppShell.Navbar p="md" style={{ backgroundColor: '#f3f3f3' }}>
-                    {/* 로고 */}
-                    <Text size="xl" weight="bold" mb="xl">
-                        Lin-key
-                    </Text>
-
-                    {/* 메뉴 */}
-                    <div style={{ marginBottom: 40 }}>
-                        {['/project', '/team'].map((path, index) => (
-                            <Button
-                                key={index}
-                                variant="subtle"
-                                color="dark"
-                                fullWidth
-                                onClick={() => handleNavigation(path)}
-                                style={{
-                                    justifyContent: 'flex-start',
-                                    fontWeight: location.pathname === path ? 'bold' : 'normal',
-                                    textDecoration: location.pathname === path ? 'underline' : 'none',
-                                    marginBottom: 16,
-                                }}
-                            >
-                                {path.replace('/', '').charAt(0).toUpperCase() + path.replace('/', '').slice(1)}
-                            </Button>
-                        ))}
-                    </div>
-
-                    {/* 하단 프로필 & 로그아웃 버튼 */}
-                    <div style={{ marginTop: 'auto' }}>
-                        <Group spacing="sm" mb="md">
-                            <Button
-                                variant="filled"
-                                radius="xl"
-                                style={{ width: 40, height: 40, padding: 0 }}
-                            >
-                                MK
-                            </Button>
-                            <div>
-                                <Text weight="bold">Markwi</Text>
-                                <Text size="xs" color="dimmed">
-                                    mk1.com@soria
-                                </Text>
-                            </div>
-                        </Group>
-                        <Button variant="subtle" color="dark" fullWidth>
-                            Log-out
-                        </Button>
-                    </div>
-                </AppShell.Navbar>
-
+                <NavbarComponent />
 
                 {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>

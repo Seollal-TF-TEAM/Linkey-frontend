@@ -2,7 +2,7 @@ import React from 'react';
 import { AppShell, Text, Group, Button } from '@mantine/core';
 import {useLocation, useNavigate} from "react-router-dom";
 
-const Navbar = () => {
+const NavbarComponent = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ const Navbar = () => {
                             </Text>
                         </div>
                     </Group>
-                    <Button variant="subtle" color="dark" fullWidth>
+                    <Button variant="subtle" color="dark" onClick={() => {console.log('clicked')}} fullWidth>
                         Log-out
                     </Button>
                 </div>
@@ -68,4 +68,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default NavbarComponent;
