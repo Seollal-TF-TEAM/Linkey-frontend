@@ -1,14 +1,30 @@
 import React from 'react';
 import { AppShell, Text, Group, Button } from '@mantine/core';
 import {useLocation, useNavigate} from "react-router-dom";
+import axios from 'axios'
 
 const NavbarComponent = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const baseUri = process.env.REACT_APP_BASE_URL;
 
     const handleNavigation = (path) => {
         if (location.pathname !== path) {
             navigate(path);
+        }
+    };
+
+    const handleLogout = () => {
+        console.log('Logout button clicked');
+        try {
+            const githubUserId = sessionStorage.getItem('githubUserId');
+            axios.delete(`${baseUri}/auth/github/logout/${githubUserId}`)
+            sessionStorage.clear();
+            navigate('/');
+        } catch (error) {
+            console.error('Logout failed:', error);
+            sessionStorage.clear();
+            navigate('/');
         }
     };
 
@@ -59,7 +75,7 @@ const NavbarComponent = () => {
                             </Text>
                         </div>
                     </Group>
-                    <Button variant="subtle" color="dark" onClick={() => {console.log('clicked')}} fullWidth>
+                    <Button variant="subtle" color="dark" onClick={handleLogout} fullWidth>
                         Log-out
                     </Button>
                 </div>
