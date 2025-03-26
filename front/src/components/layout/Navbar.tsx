@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppShell, Text, Group, Button } from '@mantine/core';
 import {useLocation, useNavigate} from "react-router-dom";
 import axios from 'axios'
@@ -7,6 +7,9 @@ const NavbarComponent = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const baseUri = process.env.REACT_APP_BASE_URL;
+    const githubUserId = sessionStorage.getItem('githubUserId');
+
+    const [userInfo, setUserInfo] = useState({ name: '', email: '' });  // userInfo 상태 관리
 
     const handleNavigation = (path) => {
         if (location.pathname !== path) {
@@ -15,9 +18,7 @@ const NavbarComponent = () => {
     };
 
     const handleLogout = () => {
-        console.log('Logout button clicked');
         try {
-            const githubUserId = sessionStorage.getItem('githubUserId');
             axios.delete(`${baseUri}/auth/github/logout/${githubUserId}`)
             sessionStorage.clear();
             navigate('/');
@@ -27,6 +28,25 @@ const NavbarComponent = () => {
             navigate('/');
         }
     };
+
+    const getUserInfo = async () => {
+
+        try {
+            if (githubUserId) {
+                const response = await axios.get(`${baseUri}/user?githubUserId=${githubUserId}`);
+                setUserInfo({
+                    name: response.data.githubUserName,
+                    email: response.data.githubProfileUrl,
+                });
+            }
+        } catch (error) {
+            console.error('Failed to fetch user info:', error);
+        }
+    };
+
+    useEffect(() => {
+        getUserInfo();
+    }, [githubUserId]);
 
     return (
         <>
@@ -66,12 +86,12 @@ const NavbarComponent = () => {
                             radius="xl"
                             style={{ width: 40, height: 40, padding: 0 }}
                         >
-                            MK
+                            {userInfo.name.charAt(0)}
                         </Button>
                         <div>
-                            <Text weight="bold">Markwi</Text>
+                            <Text weight="bold">{userInfo.name}</Text>
                             <Text size="xs" color="dimmed">
-                                mk1.com@soria
+                                {userInfo.email}
                             </Text>
                         </div>
                     </Group>
