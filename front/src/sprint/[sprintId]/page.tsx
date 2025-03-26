@@ -8,7 +8,7 @@ function SprintPage() {
     const {sprintId} = useParams();
 
     return (<>
-        {/*<Text>Hi sprint {sprintId}</Text>*/}
+        <Text>Hi sprint {sprintId}</Text>
 
     </>);
 }

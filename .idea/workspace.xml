@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409853a1-70fc-49a4-9e84-cf2ad8f2bf8f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/front/src/components/layout/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/layout/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/main/components/AddProjectDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/main/components/AddProjectDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/main/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/sprint/[sprintId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/sprint/[sprintId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/team/depth1/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/team/main/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,10 +67,11 @@
       <recent name="$PROJECT_DIR$/front/src/project/viewProjects" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/front/src/Sprint/[sprintId]" />
+      <recent name="$PROJECT_DIR$/front" />
       <recent name="$PROJECT_DIR$/front/src" />
+      <recent name="$PROJECT_DIR$/front/src/team/main" />
+      <recent name="$PROJECT_DIR$/front/src/Sprint/[sprintId]" />
       <recent name="$PROJECT_DIR$/front/src/components/layout" />
-      <recent name="$PROJECT_DIR$/front/src/project/main/components" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -103,7 +103,7 @@
       <workItem from="1742605092304" duration="2831000" />
       <workItem from="1742624015635" duration="20994000" />
       <workItem from="1742891872575" duration="1589000" />
-      <workItem from="1742955186695" duration="1603000" />
+      <workItem from="1742955186695" duration="3065000" />
     </task>
     <servers />
   </component>
