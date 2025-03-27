@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {AppShell, Badge, Box, Button, Card, Center, Flex, Group, SimpleGrid, Text, ThemeIcon, Title} from '@mantine/core';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { IconBrandGithub } from '@tabler/icons-react';
 // @ts-ignore
 import TabsComponentPage from "./Components/TabsPage.tsx";
 // @ts-ignore
@@ -27,15 +28,19 @@ function ProjectDetailPage() {
         githubRepoUrl: "https://github.com/Seollal-TF-TEAM/Linkey-frontend",
         projectDesc: "프로젝트 설명입니다.",
         teamMembers: [
-            { githubUserId: 123456 },
-            { githubUserId: 789012 } // 추가 멤버
+            { githubUserName: "HongChan1412", githubProfileUrl: "https://github.com/HongChan1412" },
+            { githubUserName: "letsgojh0810", githubProfileUrl: "https://github.com/letsgojh0810" },
+            { githubUserName: "eundeom", githubProfileUrl: "https://github.com/eundeom" },
+            { githubUserName: "EOTAEGYU", githubProfileUrl: "https://github.com/EOTAEGYU" }
         ]
     });
 
     // Sprints sample data
     const sprints = [
-        { id: 1, title: "Sprint #1", description: "Initial setup" },
-        { id: 2, title: "Sprint #2", description: "Core features" }
+        { sprintId: 1, sprintName: "Sprint #1", sprintStartAt: "2025-03-01", sprintEndAt: "2025-03-15" },
+        { sprintId: 2, sprintName: "Sprint #2", sprintStartAt: "2025-03-16", sprintEndAt: "2025-03-31" },
+        { sprintId: 3, sprintName: "Sprint #3", sprintStartAt: "2025-04-01", sprintEndAt: "2025-04-15" },
+        { sprintId: 4, sprintName: "Sprint #4", sprintStartAt: "2025-04-16", sprintEndAt: "2025-04-30" }
     ];
 
     // navigate to sprint detail page
@@ -50,6 +55,7 @@ function ProjectDetailPage() {
         }
     };
 
+// 프로젝트 상세조회
 //     useEffect(() => {
 //         if (projectId) {
 //             fetch(`${baseUri}/project/projectDetail?projectId=${projectId}`)
@@ -58,6 +64,16 @@ function ProjectDetailPage() {
 //                 .catch(error => console.error('Error:', error));
 //         }
 //     }, [projectId]);
+
+// 스프린트 리스트 조회
+//     useEffect(() => {
+//             if (projectId) {
+//                 fetch(`${baseUri}/project/${projectId}/sprint`)
+//                     .then(response => response.json())
+//                     .then(data => setSprintData(data.sprints[0]))
+//                     .catch(error => console.error('Error:', error));
+//             }
+//         }, [projectId, sprintId, baseUri])
 
 
     return (
@@ -93,23 +109,45 @@ function ProjectDetailPage() {
                                 <Text>members :</Text>
                                 {/* badge for team members */}
                                 {projectData.teamMembers.map((member, index) => (
-                                    <Badge
+                                    <a
                                         key={index}
-                                        color="rgba(94, 94, 94, 1)"
-                                        size="lg"
-                                        radius="md"
+                                        href={member.githubProfileUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ textDecoration: 'none' }}
                                     >
-                                        User{member.githubUserId}
-                                    </Badge>
+                                        <Badge
+                                            color="rgba(94, 94, 94, 1)"
+                                            size="lg"
+                                            radius="md"
+                                            style={{ cursor: 'pointer' }}
+                                            leftSection={<IconBrandGithub size={16} /> }
+                                        >
+                                            {member.githubUserName}
+                                        </Badge>
+                                    </a>
                                 ))}
                             </Group>
                             {projectData.githubRepoUrl && (
-                                <Text>
-                                    GitHub:
-                                    <a href={projectData.githubRepoUrl} target="_blank" rel="noopener noreferrer">
-                                        {projectData.githubRepoUrl}
+                                <Group align="center" spacing="xs">
+                                    <Text>GitHub:</Text>
+                                    <a
+                                        href={projectData.githubRepoUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <Badge
+                                            color="blue"
+                                            size="lg"
+                                            radius="md"
+                                            style={{ cursor: 'pointer' }}
+                                            leftSection={<IconBrandGithub size={16} /> }
+                                        >
+                                            Repository
+                                        </Badge>
                                     </a>
-                                </Text>
+                                </Group>
                             )}
                         </Flex>
 
@@ -137,11 +175,12 @@ function ProjectDetailPage() {
 
                             {/* 스프린트 목록을 반복하여 렌더링 */}
                             {sprints.map((sprint) => (
-                                <Box key={sprint.id} onClick={() => handleSprintClick(sprint.id)} style={{ cursor: 'pointer' }}>
+                                <Box key={sprint.sprintId} onClick={() => handleSprintClick(sprint.sprintId)} style={{ cursor: 'pointer' }}>
                                     <SprintPreviewComponent
-                                        sprintId={sprint.id}
-                                        title={sprint.title}
-                                        description={sprint.description}
+                                        sprintId={sprint.sprintId}
+                                        sprintName={sprint.sprintName}
+                                        sprintStartAt={sprint.sprintStartAt}
+                                        sprintEndAt={sprint.sprintEndAt}
                                     />
                                 </Box>
                             ))}
