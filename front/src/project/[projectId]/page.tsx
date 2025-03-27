@@ -37,8 +37,10 @@ function ProjectDetailPage() {
 
     // Sprints sample data
     const sprints = [
-        { id: 1, title: "Sprint #1", description: "Initial setup" },
-        { id: 2, title: "Sprint #2", description: "Core features" }
+        { sprintId: 1, sprintName: "Sprint #1", sprintStartAt: "2025-03-01", sprintEndAt: "2025-03-15" },
+        { sprintId: 2, sprintName: "Sprint #2", sprintStartAt: "2025-03-16", sprintEndAt: "2025-03-31" },
+        { sprintId: 3, sprintName: "Sprint #3", sprintStartAt: "2025-04-01", sprintEndAt: "2025-04-15" },
+        { sprintId: 4, sprintName: "Sprint #4", sprintStartAt: "2025-04-16", sprintEndAt: "2025-04-30" }
     ];
 
     // navigate to sprint detail page
@@ -53,6 +55,7 @@ function ProjectDetailPage() {
         }
     };
 
+// 프로젝트 상세조회
 //     useEffect(() => {
 //         if (projectId) {
 //             fetch(`${baseUri}/project/projectDetail?projectId=${projectId}`)
@@ -61,6 +64,16 @@ function ProjectDetailPage() {
 //                 .catch(error => console.error('Error:', error));
 //         }
 //     }, [projectId]);
+
+// 스프린트 리스트 조회
+//     useEffect(() => {
+//             if (projectId) {
+//                 fetch(`${baseUri}/project/${projectId}/sprint`)
+//                     .then(response => response.json())
+//                     .then(data => setSprintData(data.sprints[0]))
+//                     .catch(error => console.error('Error:', error));
+//             }
+//         }, [projectId, sprintId, baseUri])
 
 
     return (
@@ -162,11 +175,12 @@ function ProjectDetailPage() {
 
                             {/* 스프린트 목록을 반복하여 렌더링 */}
                             {sprints.map((sprint) => (
-                                <Box key={sprint.id} onClick={() => handleSprintClick(sprint.id)} style={{ cursor: 'pointer' }}>
+                                <Box key={sprint.sprintId} onClick={() => handleSprintClick(sprint.sprintId)} style={{ cursor: 'pointer' }}>
                                     <SprintPreviewComponent
-                                        sprintId={sprint.id}
-                                        title={sprint.title}
-                                        description={sprint.description}
+                                        sprintId={sprint.sprintId}
+                                        sprintName={sprint.sprintName}
+                                        sprintStartAt={sprint.sprintStartAt}
+                                        sprintEndAt={sprint.sprintEndAt}
                                     />
                                 </Box>
                             ))}
