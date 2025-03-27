@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState }from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
     AppShell,
@@ -21,6 +21,61 @@ function ProjectPage() {
     const [opened, { open, close }] = useDisclosure(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const [projects, setProjects] = useState([]);
+    const baseUri = process.env.REACT_APP_BASE_URL;
+    const githubUserId = sessionStorage.getItem('githubUserId');
+
+    // 테스트 데이터
+    const mockProjects = {
+        projects: [
+            {
+                projectId: 1,
+                projectName: "Linkey",
+                teamName: "LinkeyTeam"
+            },
+            {
+                projectId: 2,
+                projectName: "TaskManager",
+                teamName: "ProductivityCrew"
+            },
+            {
+                projectId: 3,
+                projectName: "EcommercePlatform",
+                teamName: "ShopDev"
+            },
+            {
+                projectId: 4,
+                projectName: "SocialApp",
+                teamName: "ConnectSphere"
+            },
+            {
+                projectId: 5,
+                projectName: "FitnessTracker",
+                teamName: "HealthSync"
+            }
+        ]
+    };
+
+//     useEffect(() => {
+//         const fetchProjects = async () => {
+//             try {
+//                 const response = await fetch(`${baseUri}/project/projectList?githubUserId=${githubUserId}`);
+//                 const data = await response.json();
+//                 setProjects(data.projects || []); // 응답에서 projects 배열을 상태에 저장
+//             } catch (error) {
+//                 console.error('프로젝트 목록 불러오기 실패:', error);
+//             }
+//         };
+//
+//         fetchProjects();
+//     }, [githubUserId]);
+
+    // API 대신 테스트 데이터를 사용
+    useEffect(() => {
+        // 실제 API 호출 대신 mock 데이터를 설정
+        setProjects(mockProjects.projects);
+    }, []);
+
 
     const handleNavigation = (path) => {
         if (location.pathname !== path) {
@@ -28,10 +83,10 @@ function ProjectPage() {
         }
     };
 
-    const handleProjectClick = () => {
-        // navigate(`/project/${project.id}`);
-        navigate(`/project/1`);
+    const handleProjectClick = (projectId) => {
+        navigate(`/project/${projectId}`);
     }
+
 
     return (
         <>
@@ -76,18 +131,26 @@ function ProjectPage() {
                                 <Button variant="transparent" color="#545454" size="xl" onClick={open}>+</Button>
                             </Card>
 
-                            {/* 기존 프로젝트 카드 (5개 예시) */}
-                            {[...Array(5)].map((_, index) => (
-                                <Card shadow="sm" p="xl" key={index} style={{ height: '200px', top:'100px', width: '300px' }}>
+                            {projects.map((project) => (
+                                <Card
+                                    shadow="sm"
+                                    p="xl"
+                                    key={project.projectId}
+                                    style={{ height: '200px', top: '100px', width: '300px' }}
+                                >
                                     <Text weight="bold" mb="xs">
-                                        Project name
+                                        {project.projectName} {/* 프로젝트 이름 표시 */}
                                     </Text>
                                     <Text size="sm" color="dimmed" mb="md">
-                                        Project description
-                                        <br />
-                                        - test added djslak 2.5
+                                        팀: {project.teamName} {/* 팀 이름 표시 */}
                                     </Text>
-                                    <Button variant="light" color="#545454" onClick={handleProjectClick}>View Details</Button>
+                                    <Button
+                                        variant="light"
+                                        color="#545454"
+                                        onClick={() => handleProjectClick(project.projectId)}
+                                    >
+                                        상세 보기
+                                    </Button>
                                 </Card>
                             ))}
                         </SimpleGrid>

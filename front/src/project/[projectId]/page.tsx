@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {AppShell, Badge, Box, Button, Card, Center, Flex, Group, SimpleGrid, Text, ThemeIcon, Title} from '@mantine/core';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 // @ts-ignore
@@ -17,6 +16,21 @@ function ProjectDetailPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const { projectId } = useParams();
+    const baseUri = process.env.REACT_APP_BASE_URL;
+
+
+    // 테스트 데이터 상태 관리
+    const [projectData, setProjectData] = useState({
+        projectId: 123,
+        projectName: "linkey",
+        teamName: "linkeyTeam",
+        githubRepoUrl: "https://github.com/Seollal-TF-TEAM/Linkey-frontend",
+        projectDesc: "프로젝트 설명입니다.",
+        teamMembers: [
+            { githubUserId: 123456 },
+            { githubUserId: 789012 } // 추가 멤버
+        ]
+    });
 
     // Sprints sample data
     const sprints = [
@@ -26,7 +40,7 @@ function ProjectDetailPage() {
 
     // navigate to sprint detail page
     const handleSprintClick = (sprintId) => {
-        navigate(`${window.location.pathname}/sprint/${sprints[0].id}`);
+        navigate(`${window.location.pathname}/sprint/${sprintId}`);
     };
 
 
@@ -35,6 +49,15 @@ function ProjectDetailPage() {
             navigate(path);
         }
     };
+
+//     useEffect(() => {
+//         if (projectId) {
+//             fetch(`${baseUri}/project/projectDetail?projectId=${projectId}`)
+//                 .then(response => response.json())
+//                 .then(data => setProjectData(data))
+//                 .catch(error => console.error('Error:', error));
+//         }
+//     }, [projectId]);
 
 
     return (
@@ -60,18 +83,34 @@ function ProjectDetailPage() {
                     <Box p="md">
                         <Flex direction="column" gap="lg">
                             {/* project name */}
-                            <Title order={1}>Project Name {projectId}</Title>
+                            <Title order={1}>{projectData.projectName}</Title>
 
                             {/* project description */}
-                            <Text>project description..</Text>
+                            <Text>{projectData.projectDesc}</Text>
 
                             {/* project team members */}
                             <Group align="center" spacing="xs">
                                 <Text>members :</Text>
                                 {/* badge for team members */}
-                                <Badge color="rgba(94, 94, 94, 1)" size="lg" radius="md">user01</Badge>
-                                <Badge color="rgba(94, 94, 94, 1)" size="lg" radius="md">user02</Badge>
+                                {projectData.teamMembers.map((member, index) => (
+                                    <Badge
+                                        key={index}
+                                        color="rgba(94, 94, 94, 1)"
+                                        size="lg"
+                                        radius="md"
+                                    >
+                                        User{member.githubUserId}
+                                    </Badge>
+                                ))}
                             </Group>
+                            {projectData.githubRepoUrl && (
+                                <Text>
+                                    GitHub:
+                                    <a href={projectData.githubRepoUrl} target="_blank" rel="noopener noreferrer">
+                                        {projectData.githubRepoUrl}
+                                    </a>
+                                </Text>
+                            )}
                         </Flex>
 
                     </Box>
