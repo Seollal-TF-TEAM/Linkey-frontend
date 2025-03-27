@@ -27,8 +27,10 @@ function ProjectDetailPage() {
         githubRepoUrl: "https://github.com/Seollal-TF-TEAM/Linkey-frontend",
         projectDesc: "프로젝트 설명입니다.",
         teamMembers: [
-            { githubUserId: 123456 },
-            { githubUserId: 789012 } // 추가 멤버
+            { githubUserName: "HongChan1412", githubProfileUrl: "https://github.com/HongChan1412" },
+            { githubUserName: "letsgojh0810", githubProfileUrl: "https://github.com/letsgojh0810" },
+            { githubUserName: "eundeom", githubProfileUrl: "https://github.com/eundeom" },
+            { githubUserName: "EOTAEGYU", githubProfileUrl: "https://github.com/EOTAEGYU" }
         ]
     });
 
@@ -93,14 +95,22 @@ function ProjectDetailPage() {
                                 <Text>members :</Text>
                                 {/* badge for team members */}
                                 {projectData.teamMembers.map((member, index) => (
-                                    <Badge
+                                    <a
                                         key={index}
-                                        color="rgba(94, 94, 94, 1)"
-                                        size="lg"
-                                        radius="md"
+                                        href={member.githubProfileUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ textDecoration: 'none' }}
                                     >
-                                        User{member.githubUserId}
-                                    </Badge>
+                                        <Badge
+                                            color="rgba(94, 94, 94, 1)"
+                                            size="lg"
+                                            radius="md"
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            {member.githubUserName}
+                                        </Badge>
+                                    </a>
                                 ))}
                             </Group>
                             {projectData.githubRepoUrl && (
