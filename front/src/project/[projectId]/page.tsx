@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {AppShell, Badge, Box, Button, Card, Center, Flex, Group, SimpleGrid, Text, ThemeIcon, Title} from '@mantine/core';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { IconBrandGithub } from '@tabler/icons-react';
 // @ts-ignore
 import TabsComponentPage from "./Components/TabsPage.tsx";
 // @ts-ignore
@@ -107,6 +108,7 @@ function ProjectDetailPage() {
                                             size="lg"
                                             radius="md"
                                             style={{ cursor: 'pointer' }}
+                                            leftSection={<IconBrandGithub size={16} /> }
                                         >
                                             {member.githubUserName}
                                         </Badge>
@@ -114,12 +116,25 @@ function ProjectDetailPage() {
                                 ))}
                             </Group>
                             {projectData.githubRepoUrl && (
-                                <Text>
-                                    GitHub:
-                                    <a href={projectData.githubRepoUrl} target="_blank" rel="noopener noreferrer">
-                                        {projectData.githubRepoUrl}
+                                <Group align="center" spacing="xs">
+                                    <Text>GitHub:</Text>
+                                    <a
+                                        href={projectData.githubRepoUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ textDecoration: 'none' }}
+                                    >
+                                        <Badge
+                                            color="blue"
+                                            size="lg"
+                                            radius="md"
+                                            style={{ cursor: 'pointer' }}
+                                            leftSection={<IconBrandGithub size={16} /> }
+                                        >
+                                            Repository
+                                        </Badge>
                                     </a>
-                                </Text>
+                                </Group>
                             )}
                         </Flex>
 
