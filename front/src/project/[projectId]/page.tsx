@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {AppShell, Badge, Box, Button, Flex, Group, Text, Title} from '@mantine/core';
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { AppShell, Badge, Box, Button, Flex, Group, Text, Title } from '@mantine/core';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IconBrandGithub } from '@tabler/icons-react';
 // @ts-ignore
 import SprintPreviewComponent from "./Components/SprintPreviewPage.tsx";
@@ -8,7 +8,6 @@ import SprintPreviewComponent from "./Components/SprintPreviewPage.tsx";
 import NavbarComponent from "../../components/layout/Navbar.tsx";
 // @ts-ignore
 import AddSprintDrawer from "./Components/AddSprintDrawer.tsx";
-
 
 function ProjectDetailPage() {
     const location = useLocation();
@@ -20,7 +19,6 @@ function ProjectDetailPage() {
     const [isAddSprintDrawerOpen, setIsAddSprintDrawerOpen] = useState(false);
     const openAddSprintDrawer = () => setIsAddSprintDrawerOpen(true);
     const closeAddSprintDrawer = () => setIsAddSprintDrawerOpen(false);
-
 
     // 테스트 데이터 상태 관리
     const [projectData, setProjectData] = useState({
@@ -50,27 +48,6 @@ function ProjectDetailPage() {
         navigate(`${window.location.pathname}/sprint/${sprintId}`);
     };
 
-// 프로젝트 상세조회
-//     useEffect(() => {
-//         if (projectId) {
-//             fetch(`${baseUri}/project/projectDetail?projectId=${projectId}`)
-//                 .then(response => response.json())
-//                 .then(data => setProjectData(data))
-//                 .catch(error => console.error('Error:', error));
-//         }
-//     }, [projectId]);
-
-// 스프린트 리스트 조회
-//     useEffect(() => {
-//             if (projectId) {
-//                 fetch(`${baseUri}/project/${projectId}/sprint`)
-//                     .then(response => response.json())
-//                     .then(data => setSprintData(data.sprints[0]))
-//                     .catch(error => console.error('Error:', error));
-//             }
-//         }, [projectId, sprintId, baseUri])
-
-
     return (
         <>
             <AppShell
@@ -85,12 +62,11 @@ function ProjectDetailPage() {
                     },
                 })}
             >
-
-                {/*<Navbar/>*/}
-                <NavbarComponent/>
+                {/* Navbar */}
+                <NavbarComponent />
 
                 {/* 메인 콘텐츠 영역 */}
-                <AppShell.Main>
+                <AppShell.Main style={{ marginLeft: 250, padding: '20px' }}>
                     <Box p="md">
                         <Flex direction="column" gap="lg">
                             {/* project name */}
@@ -116,13 +92,14 @@ function ProjectDetailPage() {
                                             size="lg"
                                             radius="md"
                                             style={{ cursor: 'pointer' }}
-                                            leftSection={<IconBrandGithub size={16} /> }
+                                            leftSection={<IconBrandGithub size={16} />}
                                         >
                                             {member.githubUserName}
                                         </Badge>
                                     </a>
                                 ))}
                             </Group>
+
                             {projectData.githubRepoUrl && (
                                 <Group align="center" spacing="xs">
                                     <Text>GitHub:</Text>
@@ -137,7 +114,7 @@ function ProjectDetailPage() {
                                             size="lg"
                                             radius="md"
                                             style={{ cursor: 'pointer' }}
-                                            leftSection={<IconBrandGithub size={16} /> }
+                                            leftSection={<IconBrandGithub size={16} />}
                                         >
                                             Repository
                                         </Badge>
@@ -145,15 +122,14 @@ function ProjectDetailPage() {
                                 </Group>
                             )}
                         </Flex>
-
                     </Box>
 
-                    <Box p="md" mt={100}>
+                    <Box p="md" mt={50}>
                         <Flex direction="column">
                             <Flex justify="space-between">
-                                <Title>Sprint</Title>
+                                <Title>Sprints</Title>
                                 <Flex align="center">
-                                    <Button size="sm" mr={100} variant="transparent" color="gray" onClick={openAddSprintDrawer} >
+                                    <Button size="sm" variant="transparent" color="gray" onClick={openAddSprintDrawer}>
                                         <Text color="darkgray" size="lg">Add Sprint +</Text>
                                     </Button>
                                 </Flex>
@@ -161,13 +137,6 @@ function ProjectDetailPage() {
 
                             {/* AddSprintDrawer component */}
                             <AddSprintDrawer opened={isAddSprintDrawerOpen} close={closeAddSprintDrawer} />
-
-                            {/*<TabsComponentPage/>*/}
-
-                            {/* each sprint preview component for projectId page */}
-                            {/*<Box onClick={handleClick}>*/}
-                            {/*    <SprintPreviewComponent/>*/}
-                            {/*</Box>*/}
 
                             {/* 스프린트 목록을 반복하여 렌더링 */}
                             {sprints.map((sprint) => (

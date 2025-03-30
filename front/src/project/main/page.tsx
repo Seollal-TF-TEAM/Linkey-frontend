@@ -113,7 +113,7 @@ function ProjectPage() {
                 {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>
                     <div style={{ display: 'flex', alignItems: 'flex-start', padding: '16px' }}>
-                        <Title order={1} mb="lg" style={{ position: 'absolute', top: 16, left: 250 }}>
+                        <Title order={1} mb="lg" style={{ position: 'absolute', top: 16, left: 300 }}>
                             Project
                         </Title>
                     </div>

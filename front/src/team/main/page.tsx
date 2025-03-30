@@ -50,7 +50,7 @@ function TeamPage() {
                 {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>
                     <Center>
-                        <div style={{ position: 'absolute', top: 16, left: 250 }}>
+                        <div style={{ position: 'absolute', top: 16, left: 300 }}>
                             <Title order={1} mb="lg">
                                 Team
                             </Title>
