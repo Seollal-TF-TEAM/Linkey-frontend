@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { useLocation, useNavigate } from 'react-router-dom';
 import {
     AppShell,
     Center,
     Text,
-    Group,
     Button,
     Title,
     SimpleGrid,
@@ -18,14 +16,6 @@ import NavBarComponent from '../../components/layout/Navbar.tsx'
 function TeamPage() {
     const [opened, { open, close }] = useDisclosure(false);
 
-    const location = useLocation();
-    const navigate = useNavigate();
-
-    const handleNavigation = (path) => {
-        if (location.pathname !== path) {
-            navigate(path);
-        }
-    };
 
     return (
         <>
@@ -108,18 +98,12 @@ function TeamPage() {
 
                     <Center>
 
-                        {/*<div style={{ position: 'static', top: 16, left: 250 }}>*/}
-                        {/*    <Title order={1} mb="lg">*/}
-                        {/*        My Team*/}
-                        {/*    </Title>*/}
-                        {/*</div>*/}
-
                         <SimpleGrid cols={4} spacing="lg" verticalSpacing="xs" mt={70}>
                             {/* 새 팀 생성용 카드 (+) */}
                             <Card
                                 shadow="sm"
                                 p="xl"
-                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height:'200px', top:'100px'}}
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height:'300px', top:'100px', width: '300px' }}
                             >
                                 {/* 새 프로젝트 생성용 사이드 페이지 열기 */}
                                 <Button variant="transparent" color="#545454" size="xl" onClick={open}>+</Button>
@@ -127,14 +111,18 @@ function TeamPage() {
 
                             {/* 기존 팀 카드 (3개 예시) */}
                             {[...Array(3)].map((_, index) => (
-                                <Card shadow="sm" p="xl" key={index} style={{ height: '200px', top:'100px', width: '200px' }}>
+                                <Card shadow="sm" p="xl" key={index} style={{ height: '300px', top:'100px', width: '300px' }}>
                                     <Text weight="bold" mb="xs">
                                         Team name
                                     </Text>
                                     <Text size="sm" color="dimmed" mb="md">
                                         Team description
                                     </Text>
-                                    <Button variant="light" color="#545454" >Button</Button>
+                                    <Text size="sm" color="dimmed" mb="md">
+                                        Team members :
+                                    </Text>
+                                    {/* team edit side page component */}
+                                    <Button variant="light" color="#545454" >Edit</Button>
                                 </Card>
                             ))}
                         </SimpleGrid>

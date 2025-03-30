@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import {AppShell, Badge, Box, Button, Card, Center, Flex, Group, SimpleGrid, Text, ThemeIcon, Title} from '@mantine/core';
+import React, { useState } from 'react';
+import {AppShell, Badge, Box, Button, Flex, Group, Text, Title} from '@mantine/core';
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import { IconBrandGithub } from '@tabler/icons-react';
 // @ts-ignore
-import TabsComponentPage from "./Components/TabsPage.tsx";
-// @ts-ignore
-import TodoComponent from "./Components/TodoPage.tsx";
-// @ts-ignore
 import SprintPreviewComponent from "./Components/SprintPreviewPage.tsx";
-import {IconPlus} from '@tabler/icons-react';
 // @ts-ignore
 import NavbarComponent from "../../components/layout/Navbar.tsx";
+// @ts-ignore
+import AddSprintDrawer from "./Components/AddSprintDrawer.tsx";
 
 
 function ProjectDetailPage() {
@@ -18,6 +15,11 @@ function ProjectDetailPage() {
     const navigate = useNavigate();
     const { projectId } = useParams();
     const baseUri = process.env.REACT_APP_BASE_URL;
+
+    // Add sprint Drawer 상태 관리
+    const [isAddSprintDrawerOpen, setIsAddSprintDrawerOpen] = useState(false);
+    const openAddSprintDrawer = () => setIsAddSprintDrawerOpen(true);
+    const closeAddSprintDrawer = () => setIsAddSprintDrawerOpen(false);
 
 
     // 테스트 데이터 상태 관리
@@ -46,13 +48,6 @@ function ProjectDetailPage() {
     // navigate to sprint detail page
     const handleSprintClick = (sprintId) => {
         navigate(`${window.location.pathname}/sprint/${sprintId}`);
-    };
-
-
-    const handleNavigation = (path) => {
-        if (location.pathname !== path) {
-            navigate(path);
-        }
     };
 
 // 프로젝트 상세조회
@@ -158,14 +153,15 @@ function ProjectDetailPage() {
                             <Flex justify="space-between">
                                 <Title>Sprint</Title>
                                 <Flex align="center">
-                                    <Button size="sm" mr={100} variant="transparent" color="gray">
-                                        <Text color="darkgray" size="lg">Add Sprint</Text>
-                                        <ThemeIcon color="#f6f7f9">
-                                            <IconPlus color="gray"/>
-                                        </ThemeIcon>
+                                    <Button size="sm" mr={100} variant="transparent" color="gray" onClick={openAddSprintDrawer} >
+                                        <Text color="darkgray" size="lg">Add Sprint +</Text>
                                     </Button>
                                 </Flex>
                             </Flex>
+
+                            {/* AddSprintDrawer component */}
+                            <AddSprintDrawer opened={isAddSprintDrawerOpen} close={closeAddSprintDrawer} />
+
                             {/*<TabsComponentPage/>*/}
 
                             {/* each sprint preview component for projectId page */}
