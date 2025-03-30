@@ -12,6 +12,7 @@ function AddSprintDrawer({ opened, close }) {
             onClose={close}
             position="right"
             size="xl"
+            overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         >
             <Text
                 style={{

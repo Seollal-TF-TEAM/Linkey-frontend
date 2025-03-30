@@ -24,11 +24,22 @@ import { IconPlus, IconTrash } from '@tabler/icons-react';
 // @ts-ignore
 import NavbarComponent from "../../components/layout/Navbar.tsx";
 // @ts-ignore
-import SprintPreviewComponent from "../../project/[projectId]/Components/SprintPreviewPage.tsx";
+import GitCommitListDrawer from "./components/GitCommintListPage.tsx";
+
 
 function SprintPage() {
     const { sprintId } = useParams();
     const [todoInput, setTodoInput] = useState('');
+    // Git commit
+    const [opened, setOpened] = useState(false);
+
+    // Git commit sample data -> 추후에 drawer으로 넘겨줘야한당!!
+    const commits = [
+        { id: '1', message: 'Fix login bug' },
+        { id: '2', message: 'Add unit tests' },
+        { id: '3', message: 'Refactor API calls' },
+        { id: '4', message: 'Update UI styles' },
+    ];
 
     // todo sample data
     const [todos, setTodos] = useState([
@@ -172,25 +183,43 @@ function SprintPage() {
                                         ) : (
                                             todos.map((todo) => (
                                                 <Group key={todo.id} position="apart" spacing="xs">
-                                                    <Group>
-                                                        <Checkbox
-                                                            checked={todo.completed}
-                                                            onChange={() => toggleTodo(todo.id)}
-                                                            color="gray.7"
-                                                        />
-                                                        <Text
-                                                            style={{
-                                                                textDecoration: todo.completed ? 'line-through' : 'none',
-                                                                color: todo.completed ? 'gray' : 'inherit'
-                                                            }}
-                                                        >
-                                                            {todo.text}
-                                                        </Text>
-                                                    </Group>
-                                                    <ActionIcon color="white" onClick={() => deleteTodo(todo.id)}>
-                                                        <IconTrash color="gray" size={16} />
-                                                    </ActionIcon>
+                                                    <Flex align="center" justify="space-between" style={{ width: '100%' }}>
+                                                        <Group>
+                                                            <Checkbox
+                                                                checked={todo.completed}
+                                                                onChange={() => toggleTodo(todo.id)}
+                                                                color="gray.7"
+                                                            />
+                                                            <Text
+                                                                style={{
+                                                                    textDecoration: todo.completed ? 'line-through' : 'none',
+                                                                    color: todo.completed ? 'gray' : 'inherit',
+                                                                }}
+                                                            >
+                                                                {todo.text}
+                                                            </Text>
+                                                        </Group>
+
+                                                        <Group>
+                                                            {/* Open Commit list Drawer */}
+                                                            <Button
+                                                                variant="transparent"
+                                                                color="gray"
+                                                                onClick={() => setOpened(true)}
+                                                            >
+                                                                Commit
+                                                            </Button>
+
+
+                                                            {/* Delete To do Icon */}
+                                                            <ActionIcon color="white" onClick={() => deleteTodo(todo.id)}>
+                                                                <IconTrash color="gray" size={16} />
+                                                            </ActionIcon>
+                                                        </Group>
+                                                    </Flex>
                                                 </Group>
+
+
                                             ))
                                         )}
                                     </Stack>
@@ -218,6 +247,13 @@ function SprintPage() {
                         </SimpleGrid>
                     </Container>
                 </AppShell.Main>
+
+
+                <GitCommitListDrawer
+                    opened={opened}
+                    close={() => setOpened(false)}
+                    commits={commits}
+                />
             </AppShell>
         </>
     );

@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409853a1-70fc-49a4-9e84-cf2ad8f2bf8f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/team/main/components/editProjectDrawer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/sprint/[sprintId]/components/GitCommintListPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/Components/AddSprintDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/Components/AddSprintDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/Components/AddSprintDrawer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/sprint/[sprintId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/sprint/[sprintId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/team/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/team/main/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +105,8 @@
       <workItem from="1742891872575" duration="1589000" />
       <workItem from="1742955186695" duration="5517000" />
       <workItem from="1743091217604" duration="3041000" />
-      <workItem from="1743299712620" duration="11267000" />
+      <workItem from="1743299712620" duration="12860000" />
+      <workItem from="1743321919976" duration="428000" />
     </task>
     <servers />
   </component>

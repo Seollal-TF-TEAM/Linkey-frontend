@@ -7,6 +7,7 @@ function AddProjectDrawer({ opened, close }) {
             onClose={close}
             position="right"
             size="xl"
+            overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
         >
             <Text style={{ fontSize: "40px", textDecoration: "underline", fontWeight: "300"  }} ml={20}> Add Project </Text>
 
