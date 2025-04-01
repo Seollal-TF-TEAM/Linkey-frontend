@@ -12,22 +12,26 @@ import {
 } from '@mantine/core';
 // @ts-ignore
 import NavBarComponent from '../../components/layout/Navbar.tsx'
+// @ts-ignore
+import AddTeamDrawer from '../createTeam/page.tsx'
 
 function TeamPage() {
     const [opened, { open, close }] = useDisclosure(false);
 
 
+    // @ts-ignore
     return (
         <>
             {/* 새 팀 생성용 사이드 페이지 */}
-            <Drawer
-                opened={opened}
-                onClose={close}
-                position="right"
-                title="Authentication"
-                size="xl" >
-                <Text> 흠 ㅋㅋ </Text>
-            </Drawer>
+            {/*<Drawer*/}
+            {/*    opened={opened}*/}
+            {/*    onClose={close}*/}
+            {/*    position="right"*/}
+            {/*    title="Authentication"*/}
+            {/*    size="xl" >*/}
+            {/*    <Text> 흠 ㅋㅋ </Text>*/}
+            {/*</Drawer>*/}
+            <AddTeamDrawer opened={opened} onClose={close}/>
 
 
 
