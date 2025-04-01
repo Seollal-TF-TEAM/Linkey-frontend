@@ -5,12 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409853a1-70fc-49a4-9e84-cf2ad8f2bf8f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/components/layout/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/components/layout/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/depth1/depth1.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/depth1/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/main/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/team/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/team/main/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +43,7 @@
     &quot;Node.js.App.js.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ej&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/eunjeong/development/Linkey/Linkey-frontend/front/src/project/veiwSprint&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
