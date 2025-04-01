@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Button } from "@mantine/core";
 import { useNavigate } from 'react-router-dom';
+// @ts-ignore
+import {checkGithubUserExists, getGithubUserIdByCode} from "../../api/rest/restApi.tsx";
 
 const GitHubLoginPage: React.FC = () => {
     const clientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
     const redirectUri = process.env.REACT_APP_REDIRECT_URI;
     const backendUri = process.env.REACT_APP_BACKEND_URI;
-    const baseUri = process.env.REACT_APP_BASE_URL;
     const scope = 'read:user user:email';
     const githubAuthorizeUrl = 'https://github.com/login/oauth/authorize';
     const navigate = useNavigate();
@@ -20,36 +21,33 @@ const GitHubLoginPage: React.FC = () => {
     };
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get('code');
-        const githubUserId = sessionStorage.getItem('githubUserId');
+        (async () => {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
+            const githubUserId = sessionStorage.getItem('githubUserId');
 
-        if (githubUserId) {
-            axios
-                .get(`${baseUri}/auth/github/exists/${githubUserId}`)
-                .then((res) => {
+            try {
+                if (githubUserId) {
+                    const res = await checkGithubUserExists(githubUserId);
                     if (res.data.exists) {
-                        navigate('/project'); // 로그인 상태면 /project로
+                        navigate('/project');
+                        return;
                     } else {
-                        sessionStorage.removeItem('githubUserId'); // 유효하지 않으면 세션 정리
+                        sessionStorage.removeItem('githubUserId');
                     }
-                })
-                .catch((err) => {
-                    console.error('Login Check Error:', err);
-                    sessionStorage.removeItem('githubUserId');
-                });
-        }
+                }
 
-        if (code) {
-            axios
-                .get(`${backendUri}?code=${code}`)
-                .then((res) => {
+                if (code) {
+                    const res = await getGithubUserIdByCode(code);
                     const userId = res.data.user.githubUserId;
                     sessionStorage.setItem('githubUserId', userId);
                     navigate('/project');
-                })
-                .catch((err) => console.error('GitHub Login Error:', err));
-        }
+                }
+            } catch (err) {
+                console.error('Login Flow Error:', err);
+                sessionStorage.removeItem('githubUserId');
+            }
+        })(); // ✅ 즉시 실행 async 함수 (IIFE)
     }, [backendUri]);
 
     return (

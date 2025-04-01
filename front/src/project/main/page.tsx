@@ -17,6 +17,7 @@ import AddProjectDrawer from '../main/components/AddProjectDrawer.tsx'
 import NavbarComponent from "../../components/layout/Navbar.tsx";
 
 
+
 function ProjectPage() {
     const [opened, { open, close }] = useDisclosure(false);
     const location = useLocation();
