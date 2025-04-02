@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409853a1-70fc-49a4-9e84-cf2ad8f2bf8f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front/src/team/editTeam/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/project/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/main/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/team/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/team/main/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,11 +66,11 @@
       <recent name="$PROJECT_DIR$/front/src/project/viewProjects" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front/src/team/editTeam" />
+      <recent name="$PROJECT_DIR$/front/src/team/editTeam/[teamId]" />
       <recent name="$PROJECT_DIR$/front" />
       <recent name="$PROJECT_DIR$/front/src" />
       <recent name="$PROJECT_DIR$/front/src/team/main" />
-      <recent name="$PROJECT_DIR$/front/src/Sprint/[sprintId]" />
-      <recent name="$PROJECT_DIR$/front/src/components/layout" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -107,7 +107,7 @@
       <workItem from="1743299712620" duration="12860000" />
       <workItem from="1743321919976" duration="3271000" />
       <workItem from="1743511627733" duration="161000" />
-      <workItem from="1743601098484" duration="2175000" />
+      <workItem from="1743601098484" duration="3306000" />
     </task>
     <servers />
   </component>

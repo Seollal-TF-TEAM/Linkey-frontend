@@ -17,6 +17,8 @@ import NavBarComponent from '../../components/layout/Navbar.tsx'
 // @ts-ignore
 import AddTeamDrawer from '../createTeam/page.tsx'
 import { IconBrandGithub } from "@tabler/icons-react";
+// @ts-ignore
+import EditTeamDrawer from "../editTeam/page.tsx";
 
 const teams = [
     {
@@ -45,11 +47,16 @@ const teams = [
 ];
 
 function TeamPage() {
-    const [opened, { open, close }] = useDisclosure(false);
+    const [openedAdd, { open: openAdd, close: closeAdd }] = useDisclosure(false);
+    const [openedEdit, { open: openEdit, close: closeEdit }] = useDisclosure(false);
+    const [selectedTeam, setSelectedTeam] = React.useState(null);
+
+
 
     return (
         <>
-            <AddTeamDrawer opened={opened} onClose={close} />
+            <AddTeamDrawer opened={openedAdd} onClose={closeAdd} />
+            <EditTeamDrawer opened={openedEdit} onClose={closeEdit} team={selectedTeam}/>
 
             <AppShell
                 padding="md"
@@ -88,7 +95,7 @@ function TeamPage() {
                                     border: '1px solid #ddd'
                                 }}
                             >
-                                <Button variant="transparent" color="dark" size="xl" onClick={open}>+</Button>
+                                <Button variant="transparent" color="dark" size="xl" onClick={openAdd}>+</Button>
                             </Card>
 
                             {teams.map((team, index) => (
@@ -139,7 +146,11 @@ function TeamPage() {
                                             </Group>
                                         </Text>
                                     </Stack>
-                                    <Button variant="default" color="dark" fullWidth> Edit </Button>
+                                    <Button variant="default" color="dark" fullWidth
+                                            onClick={() => {
+                                                setSelectedTeam(team);
+                                                openEdit();
+                                            }}> Edit </Button>
                                 </Card>
                             ))}
                         </SimpleGrid>
