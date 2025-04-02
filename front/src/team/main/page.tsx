@@ -8,21 +8,48 @@ import {
     Title,
     SimpleGrid,
     Card,
-    Drawer, TextInput, Flex, MultiSelect
+    Badge,
+    Group,
+    Stack
 } from '@mantine/core';
 // @ts-ignore
 import NavBarComponent from '../../components/layout/Navbar.tsx'
 // @ts-ignore
 import AddTeamDrawer from '../createTeam/page.tsx'
+import { IconBrandGithub } from "@tabler/icons-react";
+
+const teams = [
+    {
+        name: "Alpha Team",
+        description: "Focused on cloud development.",
+        members: [
+            { githubUserName: 'HongChan1412', githubProfileUrl: 'https://github.com/HongChan1412' },
+            { githubUserName: 'letsgojh0810', githubProfileUrl: 'https://github.com/letsgojh0810' }
+        ]
+    },
+    {
+        name: "Beta Team",
+        description: "Building innovative web apps.",
+        members: [
+            { githubUserName: 'eundeom', githubProfileUrl: 'https://github.com/eundeom' },
+            { githubUserName: 'devUser', githubProfileUrl: 'https://github.com/devUser' }
+        ]
+    },
+    {
+        name: "Gamma Team",
+        description: "Exploring AI and machine learning.",
+        members: [
+            { githubUserName: 'mlExpert', githubProfileUrl: 'https://github.com/mlExpert' }
+        ]
+    }
+];
 
 function TeamPage() {
     const [opened, { open, close }] = useDisclosure(false);
 
-
-    // @ts-ignore
     return (
         <>
-            <AddTeamDrawer opened={opened} onClose={close}/>
+            <AddTeamDrawer opened={opened} onClose={close} />
 
             <AppShell
                 padding="md"
@@ -32,89 +59,87 @@ function TeamPage() {
                         backgroundColor:
                             theme.colorScheme === 'dark'
                                 ? theme.colors.dark[8]
-                                : theme.colors.gray[0],
+                                : theme.colors.gray[1],
                     },
                 })}
             >
-                {/* Navbar 영역 */}
-                <NavBarComponent/>
+                <NavBarComponent />
 
-                {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>
                     <Center>
                         <div style={{ position: 'absolute', top: 16, left: 300 }}>
-                            <Title order={1} mb="lg">
+                            <Title order={1} mb="lg" color="dark">
                                 Team
                             </Title>
                         </div>
 
-                        <SimpleGrid cols={3} spacing="lg" verticalSpacing="xs">
-                            <Flex  ml={400} mt={140} w={600} direction="column">
-                                {/* Team name */}
-                                <Flex gap="md" align="flex-end" mb={30}>
-                                    <TextInput
-                                        size="md"
-                                        label="Team Name"
-                                        placeholder="Team Name"
-                                        style={{ flex: 9 }}
-                                    />
-                                </Flex>
-
-                                {/* select DB user for team members */}
-                                <Flex gap="md" align="flex-end" mb={30}>
-                                    <MultiSelect
-                                        size="md"
-                                        label="Select Team Members"
-                                        placeholder="Choose your team members"
-                                        style={{ flex: 9 }}
-                                        data={['은정', '정현', '원호', '대연', '민지', '홍찬', '슬기']}
-                                        searchable
-                                    />
-                                </Flex>
-                                <Flex w={100} ml={500}>
-                                    <Button
-                                        variant="filled"
-                                        color="#545454"
-                                        size="md"
-                                        style={{ flex: 1 }}
-                                        mt={20}
-                                    >
-                                        Edit
-                                    </Button>
-                                </Flex>
-                            </Flex>
-                        </SimpleGrid>
-                    </Center>
-
-
-
-                    <Center>
-
-                        <SimpleGrid cols={4} spacing="lg" verticalSpacing="xs" mt={70}>
-                            {/* 새 팀 생성용 카드 (+) */}
+                        <SimpleGrid cols={4} spacing="xl" verticalSpacing="md" mt={70}>
                             <Card
-                                shadow="sm"
+                                shadow="md"
                                 p="xl"
-                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height:'300px', top:'100px', width: '300px' }}
+                                radius="lg"
+                                h="300"
+                                w="300"
+                                display="flex"
+                                style={{
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    backgroundColor: '#f5f5f5',
+                                    border: '1px solid #ddd'
+                                }}
                             >
-                                {/* 새 프로젝트 생성용 사이드 페이지 열기 */}
-                                <Button variant="transparent" color="#545454" size="xl" onClick={open}>+</Button>
+                                <Button variant="transparent" color="dark" size="xl" onClick={open}>+</Button>
                             </Card>
 
-                            {/* 기존 팀 카드 (3개 예시) */}
-                            {[...Array(3)].map((_, index) => (
-                                <Card shadow="sm" p="xl" key={index} style={{ height: '300px', top:'100px', width: '300px' }}>
-                                    <Text weight="bold" mb="xs">
-                                        Team name
-                                    </Text>
-                                    <Text size="sm" color="dimmed" mb="md">
-                                        Team description
-                                    </Text>
-                                    <Text size="sm" color="dimmed" mb="md">
-                                        Team members :
-                                    </Text>
-                                    {/* team edit side page component */}
-                                    <Button variant="light" color="#545454" >Edit</Button>
+                            {teams.map((team, index) => (
+                                <Card
+                                    shadow="md"
+                                    p="lg"
+                                    key={index}
+                                    radius="lg"
+                                    h="300"
+                                    w="300"
+                                    display="flex"
+                                    style={{
+                                        backgroundColor: '#ffffff',
+                                        border: '1px solid #ddd',
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between'
+                                    }}
+                                >
+                                    <Stack spacing="sm" style={{ flexGrow: 1 }}>
+                                        <Text weight={700} mb="xs" color="dark" size="lg" fw={700}>
+                                            {team.name}
+                                        </Text>
+                                        <Text size="sm" color="gray" mb="md">
+                                            {team.description}
+                                        </Text>
+                                        <Text size="sm" color="gray" mb="md">
+                                            <Text weight={500} mb="xs">Members:</Text>
+                                            <Group spacing="xs">
+                                                {team.members.map((member, idx) => (
+                                                    <a
+                                                        key={idx}
+                                                        href={member.githubProfileUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        style={{ textDecoration: 'none' }}
+                                                    >
+                                                        <Badge
+                                                            color="gray"
+                                                            size="md"
+                                                            radius="md"
+                                                            style={{ cursor: 'pointer', backgroundColor: '#e0e0e0' }}
+                                                            leftSection={<IconBrandGithub size={16} />}
+                                                        >
+                                                            {member.githubUserName}
+                                                        </Badge>
+                                                    </a>
+                                                ))}
+                                            </Group>
+                                        </Text>
+                                    </Stack>
+                                    <Button variant="default" color="dark" fullWidth> Edit </Button>
                                 </Card>
                             ))}
                         </SimpleGrid>
