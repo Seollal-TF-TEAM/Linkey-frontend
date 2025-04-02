@@ -77,7 +77,7 @@ function TeamPage() {
                             <Card
                                 shadow="md"
                                 p="xl"
-                                radius="lg"
+                                radius="md"
                                 h="300"
                                 w="300"
                                 display="flex"
@@ -96,7 +96,7 @@ function TeamPage() {
                                     shadow="md"
                                     p="lg"
                                     key={index}
-                                    radius="lg"
+                                    radius="md"
                                     h="300"
                                     w="300"
                                     display="flex"
