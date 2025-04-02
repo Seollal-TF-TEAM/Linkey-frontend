@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="409853a1-70fc-49a4-9e84-cf2ad8f2bf8f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front/src/team/editTeam/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/team/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/team/main/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,24 +40,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.App.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ej&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/eunjeong/development/Linkey/Linkey-frontend/front/src/project/veiwSprint&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.App.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "teamPage",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/eunjeong/development/Linkey/Linkey-frontend/front/src/project/veiwSprint",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/front/src/project/veiwSprint" />
@@ -64,11 +66,11 @@
       <recent name="$PROJECT_DIR$/front/src/project/viewProjects" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front/src/team/editTeam" />
+      <recent name="$PROJECT_DIR$/front/src/team/editTeam/[teamId]" />
       <recent name="$PROJECT_DIR$/front" />
       <recent name="$PROJECT_DIR$/front/src" />
       <recent name="$PROJECT_DIR$/front/src/team/main" />
-      <recent name="$PROJECT_DIR$/front/src/Sprint/[sprintId]" />
-      <recent name="$PROJECT_DIR$/front/src/components/layout" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -104,6 +106,8 @@
       <workItem from="1743091217604" duration="3041000" />
       <workItem from="1743299712620" duration="12860000" />
       <workItem from="1743321919976" duration="3271000" />
+      <workItem from="1743511627733" duration="161000" />
+      <workItem from="1743601098484" duration="3306000" />
     </task>
     <servers />
   </component>
