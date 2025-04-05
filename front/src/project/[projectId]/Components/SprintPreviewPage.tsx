@@ -7,6 +7,7 @@ import TodoComponent from "./TodoPage.tsx";
 
 function SprintPreviewComponent({ sprintId, sprintName, sprintStartAt, sprintEndAt }) {
     const days = differenceInDays(new Date(sprintEndAt), new Date(sprintStartAt));
+
     return (
         <SimpleGrid cols={1} spacing="lg">
             <Card
@@ -40,7 +41,7 @@ function SprintPreviewComponent({ sprintId, sprintName, sprintStartAt, sprintEnd
                         <Text size="sm" color="gray">Duration: {days} days</Text>
                     </Box>
                     <Box>
-                        <TodoComponent />
+                        <TodoComponent sprintId={sprintId}/>
                     </Box>
                 </Flex>
             </Card>

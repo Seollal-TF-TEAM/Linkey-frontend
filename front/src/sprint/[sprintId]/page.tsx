@@ -50,14 +50,14 @@ function SprintPage() {
     ]);
 
     // Sprint statistics and info sample data
-    const sprintInfo = {
-        name: 'Sprint #1',
-        startDate: '2025-03-20',
-        endDate: '2025-04-03',
-        progress: 35,
-        tasks: 12,
-        completedTasks: 4
-    };
+    // const sprintInfo = {
+    //     name: 'Sprint #1',
+    //     startDate: '2025-03-20',
+    //     endDate: '2025-04-03',
+    //     progress: 35,
+    //     tasks: 12,
+    //     completedTasks: 4
+    // };
 
     // Sample sprint images sample data
     const sprintImages = [
@@ -66,6 +66,7 @@ function SprintPage() {
         { id: 3, title: '스프린트 회의', url: 'https://i.pinimg.com/236x/28/f1/00/28f100d4a735b6a176c54f8c03e2820e.jpg' }
     ];
 
+    // 새로운 ToDo 추가
     const handleAddTodo = () => {
         if (todoInput.trim() !== '') {
             const newTodo = {
@@ -73,19 +74,51 @@ function SprintPage() {
                 text: todoInput,
                 completed: false
             };
-            setTodos([...todos, newTodo]);
+
+            const newTodos = [...todos, newTodo];
+            setTodos(newTodos);
             setTodoInput('');
+            updateSprintStats(newTodos);
         }
     };
 
-    const toggleTodo = (id) => {
-        setTodos(todos.map(todo =>
+    // 체크박스 클릭 시 상태 변경
+    const toggleTodo = (id: number) => {
+        const newTodos = todos.map(todo =>
             todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        ));
+        );
+        setTodos(newTodos);
+        updateSprintStats(newTodos);
     };
 
-    const deleteTodo = (id) => {
-        setTodos(todos.filter(todo => todo.id !== id));
+    // 할 일 삭제
+    const deleteTodo = (id: number) => {
+        const newTodos = todos.filter(todo => todo.id !== id);
+        setTodos(newTodos);
+        updateSprintStats(newTodos);
+    };
+
+    // Sprint 정보 상태 (초기값 설정)
+    const [sprintInfo, setSprintInfo] = useState({
+        name: 'Sprint #1',
+        startDate: '2025-03-20',
+        endDate: '2025-04-03',
+        progress: 0,
+        tasks: todos.length, // 전체 할 일 개수
+        completedTasks: todos.filter(todo => todo.completed).length // 완료된 할 일 개수
+    });
+
+    const updateSprintStats = (newTodos: typeof todos) => {
+        const totalTasks = newTodos.length;
+        const completedTasks = newTodos.filter(todo => todo.completed).length;
+        const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
+        setSprintInfo(prev => ({
+            ...prev,
+            tasks: totalTasks,
+            completedTasks: completedTasks,
+            progress: progress
+        }));
     };
 
     return (
@@ -156,7 +189,7 @@ function SprintPage() {
                                 <Group position="apart">
                                     <Title order={3} color="gray.8">To do List</Title>
                                     <Text color="gray.6">
-                                        {todos.filter(todo => todo.completed).length}/{todos.length} Complete
+                                        {sprintInfo.completedTasks}/{sprintInfo.tasks} Complete
                                     </Text>
                                 </Group>
                             </Card.Section>
@@ -201,16 +234,6 @@ function SprintPage() {
                                                         </Group>
 
                                                         <Group>
-                                                            {/* Open Commit list Drawer */}
-                                                            <Button
-                                                                variant="transparent"
-                                                                color="gray"
-                                                                onClick={() => setOpened(true)}
-                                                            >
-                                                                Commit
-                                                            </Button>
-
-
                                                             {/* Delete To do Icon */}
                                                             <ActionIcon color="white" onClick={() => deleteTodo(todo.id)}>
                                                                 <IconTrash color="gray" size={16} />
@@ -218,8 +241,6 @@ function SprintPage() {
                                                         </Group>
                                                     </Flex>
                                                 </Group>
-
-
                                             ))
                                         )}
                                     </Stack>

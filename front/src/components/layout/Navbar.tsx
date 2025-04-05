@@ -33,7 +33,7 @@ const NavbarComponent = () => {
 
         try {
             if (githubUserId) {
-                const response = await axios.get(`${baseUri}/user?githubUserId=${githubUserId}`);
+                const response = await axios.get(`${baseUri}/users?githubUserId=${githubUserId}`);
                 setUserInfo({
                     name: response.data.githubUserName,
                     email: response.data.githubProfileUrl,
@@ -97,7 +97,7 @@ const NavbarComponent = () => {
                             </Avatar>
                             <div>
                                 <Text weight="bold" style={{ fontSize: '1.2rem' }}>{userInfo.name}</Text>
-                                <Text size="sm" color="dimmed">{userInfo.email}</Text>
+                                <Text size="xs" color="dimmed">{userInfo.email}</Text>
                             </div>
                         </Group>
                         <Button

@@ -35,7 +35,5 @@ export function AddTeamDrawer({ opened, onClose }) {
     );
 }
 
-// 👉 라우팅용 페이지 컴포넌트 (default export)
-export default function CreateTeamPage() {
-    return <div>Authentication <br /> ㅎ ㅋㅋ</div>;
-}
+
+export default AddTeamDrawer;

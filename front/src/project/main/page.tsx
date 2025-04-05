@@ -1,4 +1,6 @@
-import React, { useEffect, useState }from 'react';
+
+
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
     AppShell,
@@ -9,23 +11,23 @@ import {
     Title,
     SimpleGrid,
     Card,
+    Stack
 } from '@mantine/core';
-import {useDisclosure} from "@mantine/hooks";
+import { useDisclosure } from "@mantine/hooks";
 // @ts-ignore
 import AddProjectDrawer from '../main/components/AddProjectDrawer.tsx'
 // @ts-ignore
 import NavbarComponent from "../../components/layout/Navbar.tsx";
 
-
-
 function ProjectPage() {
     const [opened, { open, close }] = useDisclosure(false);
     const location = useLocation();
     const navigate = useNavigate();
-    const [projects, setProjects] = useState([]);
     const baseUri = process.env.REACT_APP_BASE_URL;
-    const githubUserId = sessionStorage.getItem('githubUserId');
+    const [projects, setProjects] = useState([]);
+    const githubUserId = window.sessionStorage.getItem("githubUserId");
 
+    console.log()
     // 테스트 데이터
     const mockProjects = {
         projects: [
@@ -57,41 +59,28 @@ function ProjectPage() {
         ]
     };
 
-//     useEffect(() => {
-//         const fetchProjects = async () => {
-//             try {
-//                 const response = await fetch(`${baseUri}/project/projectList?githubUserId=${githubUserId}`);
-//                 const data = await response.json();
-//                 setProjects(data.projects || []); // 응답에서 projects 배열을 상태에 저장
-//             } catch (error) {
-//                 console.error('프로젝트 목록 불러오기 실패:', error);
-//             }
-//         };
-//
-//         fetchProjects();
-//     }, [githubUserId]);
-
-    // API 대신 테스트 데이터를 사용
+    // http://localhost:8080/api/projects/projectList?githubUserId=103468518
     useEffect(() => {
-        // 실제 API 호출 대신 mock 데이터를 설정
-        setProjects(mockProjects.projects);
+        const fetchProjects = async () => {
+            try {
+                const response = await fetch(`${baseUri}/projects/projectList?githubUserId=${githubUserId}`);
+                const data = await response.json();
+                const projects = data?.result?.data?.projects || [];
+                setProjects(projects);
+            } catch (error) {
+                console.error('프로젝트 목록 불러오기 실패:', error);
+            }
+        };
+
+        fetchProjects();
     }, []);
-
-
-    const handleNavigation = (path) => {
-        if (location.pathname !== path) {
-            navigate(path);
-        }
-    };
 
     const handleProjectClick = (projectId) => {
         navigate(`/project/${projectId}`);
     }
 
-
     return (
         <>
-
             {/* 프로젝트 추가 사이드 페이지 컴포넌트 */}
             <AddProjectDrawer opened={opened} close={close} />
 
@@ -103,7 +92,7 @@ function ProjectPage() {
                         backgroundColor:
                             theme.colorScheme === 'dark'
                                 ? theme.colors.dark[8]
-                                : theme.colors.gray[0],
+                                : theme.colors.gray[1],
                     },
                 })}
             >
@@ -113,44 +102,66 @@ function ProjectPage() {
 
                 {/* 메인 콘텐츠 영역 */}
                 <AppShell.Main>
-                    <div style={{ display: 'flex', alignItems: 'flex-start', padding: '16px' }}>
-                        <Title order={1} mb="lg" style={{ position: 'absolute', top: 16, left: 300 }}>
-                            Project
-                        </Title>
-                    </div>
-
                     <Center>
-                        <SimpleGrid cols={3} spacing="lg">
+                        <div style={{ position: 'absolute', top: 16, left: 300 }}>
+                            <Title order={1} mb="lg" color="dark">
+                                Projects
+                            </Title>
+                        </div>
 
-                            {/* 새 프로젝트 생성용 카드 (+) */}
+                        <SimpleGrid cols={3} spacing="xl" verticalSpacing="md" mt={70}>
                             <Card
-                                shadow="sm"
+                                shadow="md"
                                 p="xl"
-                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height:'200px', top:'100px'}}
+                                radius="md"
+                                h="230"
+                                w="320"
+                                display="flex"
+                                style={{
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    backgroundColor: '#f5f5f5',
+                                    border: '1px solid #ddd'
+                                }}
                             >
-                                {/* 새 프로젝트 생성용 사이드 페이지 열기 */}
-                                <Button variant="transparent" color="#545454" size="xl" onClick={open}>+</Button>
+                                <Button variant="transparent" color="dark" size="xl" onClick={open}>+</Button>
                             </Card>
 
-                            {projects.map((project) => (
+                            {/* {projectId: 1, projectName: 'Linkey', teamName: 'LinkeyTeam'} */}
+                            {projects.map((project: { projectId: any; projectName: any; teamName: any; }) => (
                                 <Card
-                                    shadow="sm"
-                                    p="xl"
+                                    shadow="md"
+                                    p="lg"
                                     key={project.projectId}
-                                    style={{ height: '200px', top: '100px', width: '300px' }}
+                                    radius="md"
+                                    h="230"
+                                    w="320"
+                                    display="flex"
+                                    style={{
+                                        backgroundColor: '#ffffff',
+                                        border: '1px solid #ddd',
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-between'
+                                    }}
                                 >
-                                    <Text weight="bold" mb="xs">
-                                        {project.projectName} {/* 프로젝트 이름 표시 */}
-                                    </Text>
-                                    <Text size="sm" color="dimmed" mb="md">
-                                        팀: {project.teamName} {/* 팀 이름 표시 */}
-                                    </Text>
+                                    <Stack spacing="sm" style={{ flexGrow: 1 }}>
+                                        <Text weight={700} mb="xs" color="dark" size="lg" fw={700}>
+                                            {project.projectName} {/* 프로젝트 이름 표시 */}
+                                        </Text>
+                                        <Text size="sm" color="gray" mb="md">
+                                            Team descriptions..
+                                        </Text>
+                                        <Text size="sm" color="gray" mb="md">
+                                            Team: {project.teamName} {/* 팀 이름 표시 */}
+                                        </Text>
+                                    </Stack>
                                     <Button
                                         variant="light"
-                                        color="#545454"
+                                        color="dark"
+                                        fullWidth
                                         onClick={() => handleProjectClick(project.projectId)}
                                     >
-                                        상세 보기
+                                        View Details
                                     </Button>
                                 </Card>
                             ))}
