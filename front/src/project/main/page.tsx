@@ -6,7 +6,6 @@ import {
     AppShell,
     Center,
     Text,
-    Group,
     Button,
     Title,
     SimpleGrid,
@@ -25,39 +24,8 @@ function ProjectPage() {
     const navigate = useNavigate();
     const baseUri = process.env.REACT_APP_BASE_URL;
     const [projects, setProjects] = useState([]);
+    const [teamList, setTeamList] = useState([]);
     const githubUserId = window.sessionStorage.getItem("githubUserId");
-
-    console.log()
-    // 테스트 데이터
-    const mockProjects = {
-        projects: [
-            {
-                projectId: 1,
-                projectName: "Linkey",
-                teamName: "LinkeyTeam"
-            },
-            {
-                projectId: 2,
-                projectName: "TaskManager",
-                teamName: "ProductivityCrew"
-            },
-            {
-                projectId: 3,
-                projectName: "EcommercePlatform",
-                teamName: "ShopDev"
-            },
-            {
-                projectId: 4,
-                projectName: "SocialApp",
-                teamName: "ConnectSphere"
-            },
-            {
-                projectId: 5,
-                projectName: "FitnessTracker",
-                teamName: "HealthSync"
-            }
-        ]
-    };
 
     // http://localhost:8080/api/projects/projectList?githubUserId=103468518
     useEffect(() => {
@@ -75,6 +43,28 @@ function ProjectPage() {
         fetchProjects();
     }, []);
 
+    // team 불러오기
+    useEffect(() => {
+        // teams/teamListAll
+        const fetchTeamId = async () => {
+            try {
+                const response = await fetch(`${baseUri}/teams/teamListAll`);
+                const data = await response.json();
+                const teamIdList = data?.result?.data?.teams || [];
+                console.log(teamIdList);
+                const formattedTeamList = teamIdList.map((member: any) => ({
+                    id: member.teamId,
+                    name: member.teamName,
+                }));
+                setTeamList(formattedTeamList);
+            } catch (error) {
+                console.error('팀 목록 불러오기 실패:', error);
+            }
+        };
+        fetchTeamId();
+    }, [opened]);
+
+
     const handleProjectClick = (projectId) => {
         navigate(`/project/${projectId}`);
     }
@@ -82,7 +72,7 @@ function ProjectPage() {
     return (
         <>
             {/* 프로젝트 추가 사이드 페이지 컴포넌트 */}
-            <AddProjectDrawer opened={opened} close={close} />
+            <AddProjectDrawer opened={opened} close={close} teamList={teamList}/>
 
             <AppShell
                 padding="md"
@@ -127,7 +117,6 @@ function ProjectPage() {
                                 <Button variant="transparent" color="dark" size="xl" onClick={open}>+</Button>
                             </Card>
 
-                            {/* {projectId: 1, projectName: 'Linkey', teamName: 'LinkeyTeam'} */}
                             {projects.map((project: { projectId: any; projectName: any; teamName: any; }) => (
                                 <Card
                                     shadow="md"

@@ -4,7 +4,6 @@ import { IconSquare } from '@tabler/icons-react';
 import {useParams} from "react-router-dom";
 
 function TodoComponent({ sprintId }: { sprintId: number }) {
-    const { projectId } = useParams(); // url에서 project id 받아옴
     const baseUri = process.env.REACT_APP_BASE_URL;
     const [todos, setTodos] = useState([]);
 

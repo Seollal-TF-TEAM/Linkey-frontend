@@ -4,6 +4,8 @@ import { useState } from 'react';
 function GitCommitDrawer({ opened, close, commits }) {
     const [selectedCommits, setSelectedCommits] = useState([]);
 
+
+
     return (
         <Drawer
             opened={opened}
@@ -34,6 +36,7 @@ function GitCommitDrawer({ opened, close, commits }) {
                                 key={commit.id}
                                 value={commit.id}
                                 label={commit.message}
+                                color="gray"
                             />
                         ))}
                     </Flex>

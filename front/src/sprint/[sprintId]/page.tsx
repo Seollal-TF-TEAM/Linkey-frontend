@@ -149,7 +149,7 @@ function SprintPage() {
                                     {sprintInfo.startDate} ~ {sprintInfo.endDate}
                                 </Text>
                             </Box>
-                            <Button variant="light" color="gray" radius="xl">setting</Button>
+                            <Button variant="light" color="gray" radius="xl">edit</Button>
                         </Group>
 
                         <Divider mb="lg" />
@@ -228,6 +228,7 @@ function SprintPage() {
                                                                     textDecoration: todo.completed ? 'line-through' : 'none',
                                                                     color: todo.completed ? 'gray' : 'inherit',
                                                                 }}
+                                                                onClick={() => {setOpened(true)}}
                                                             >
                                                                 {todo.text}
                                                             </Text>

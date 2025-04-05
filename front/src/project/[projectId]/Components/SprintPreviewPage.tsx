@@ -11,14 +11,14 @@ function SprintPreviewComponent({ sprintId, sprintName, sprintStartAt, sprintEnd
     return (
         <SimpleGrid cols={1} spacing="lg">
             <Card
-                shadow="md" // 약간 더 강한 그림자
+                shadow="md"
                 p="xl"
                 radius="lg"
                 w={1200}
                 mt={30}
                 ml={100}
                 withBorder
-                style={{ backgroundColor: '#f9fafb' }} // 밝은 배경색 추가
+                style={{ backgroundColor: '#f9fafb' }}
             >
                 <Flex direction="column" gap="md">
                     <Box>
@@ -26,7 +26,8 @@ function SprintPreviewComponent({ sprintId, sprintName, sprintStartAt, sprintEnd
                             {sprintName}
                         </Text>
                         <Group spacing="xs">
-                            <IconCalendar size={18} color="gray" /> {/* 캘린더 아이콘 */}
+                            <IconCalendar size={18} color="gray" />
+                            {/* 캘린더 */}
                             <Text size="sm" color="gray">
                                 Sprint Period:{' '}
                                 <Badge color="teal" variant="light">
