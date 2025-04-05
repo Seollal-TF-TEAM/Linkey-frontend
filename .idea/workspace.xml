@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="409853a1-70fc-49a4-9e84-cf2ad8f2bf8f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/sprint/[sprintId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/sprint/[sprintId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/Components/SprintPreviewPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/Components/SprintPreviewPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/Components/TodoPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/Components/TodoPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/[projectId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/project/main/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/project/main/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
