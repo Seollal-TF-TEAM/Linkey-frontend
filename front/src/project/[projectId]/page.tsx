@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppShell, Badge, Box, Button, Flex, Group, Text, Title } from '@mantine/core';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IconBrandGithub } from '@tabler/icons-react';
@@ -12,41 +12,49 @@ import AddSprintDrawer from "./Components/AddSprintDrawer.tsx";
 function ProjectDetailPage() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { projectId } = useParams();
+    const { projectId } = useParams(); // url에서 project id 받아옴
     const baseUri = process.env.REACT_APP_BASE_URL;
+    const [project, setProject] = useState([]);
+    const [sprints, setSprints] = useState([]);
 
     // Add sprint Drawer 상태 관리
     const [isAddSprintDrawerOpen, setIsAddSprintDrawerOpen] = useState(false);
     const openAddSprintDrawer = () => setIsAddSprintDrawerOpen(true);
     const closeAddSprintDrawer = () => setIsAddSprintDrawerOpen(false);
 
-    // 테스트 데이터 상태 관리
-    const [projectData, setProjectData] = useState({
-        projectId: 123,
-        projectName: "linkey",
-        teamName: "linkeyTeam",
-        githubRepoUrl: "https://github.com/Seollal-TF-TEAM/Linkey-frontend",
-        projectDesc: "프로젝트 설명입니다.",
-        teamMembers: [
-            { githubUserName: "HongChan1412", githubProfileUrl: "https://github.com/HongChan1412" },
-            { githubUserName: "letsgojh0810", githubProfileUrl: "https://github.com/letsgojh0810" },
-            { githubUserName: "eundeom", githubProfileUrl: "https://github.com/eundeom" },
-            { githubUserName: "EOTAEGYU", githubProfileUrl: "https://github.com/EOTAEGYU" }
-        ]
-    });
-
-    // Sprints sample data
-    const sprints = [
-        { sprintId: 1, sprintName: "Sprint #1", sprintStartAt: "2025-03-01", sprintEndAt: "2025-03-15" },
-        { sprintId: 2, sprintName: "Sprint #2", sprintStartAt: "2025-03-16", sprintEndAt: "2025-03-31" },
-        { sprintId: 3, sprintName: "Sprint #3", sprintStartAt: "2025-04-01", sprintEndAt: "2025-04-15" },
-        { sprintId: 4, sprintName: "Sprint #4", sprintStartAt: "2025-04-16", sprintEndAt: "2025-04-30" }
-    ];
-
     // navigate to sprint detail page
     const handleSprintClick = (sprintId) => {
         navigate(`${window.location.pathname}/sprint/${sprintId}`);
     };
+
+    // http://localhost:8080/api/projects/projectDetail?projectId=12
+    useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                const response = await fetch(`${baseUri}/projects/projectDetail?projectId=${projectId}`);
+                const data = await response.json();
+                const projectDetail = data?.result?.data;
+                setProject(projectDetail);
+            } catch (error) {
+                console.error('프로젝트 목록 불러오기 실패:', error);
+            }
+        };
+
+        // http://localhost:8080/api/sprints/sprintList?projectId=17
+        const fetchSprints = async () => {
+            try {
+                const response = await fetch(`${baseUri}/sprints/sprintList?projectId=${projectId}`);
+                const data = await response.json();
+                const sprintList = data?.result?.data?.sprints || [];
+                setSprints(sprintList);
+            } catch (error) {
+                console.error('프로젝트 목록 불러오기 실패:', error);
+            }
+        };
+
+        fetchProject(); // 프로젝트 데이터 가져오기
+        fetchSprints(); // 프로젝트의 스프린트 리스트 데이터 가져오기
+    }, []);
 
     return (
         <>
@@ -70,16 +78,16 @@ function ProjectDetailPage() {
                     <Box p="md">
                         <Flex direction="column" gap="lg">
                             {/* project name */}
-                            <Title order={1}>{projectData.projectName}</Title>
+                            <Title order={1}>{project.projectName}</Title>
 
                             {/* project description */}
-                            <Text>{projectData.projectDesc}</Text>
+                            <Text>{project.projectDesc}</Text>
 
                             {/* project team members */}
                             <Group align="center" spacing="xs">
                                 <Text>members :</Text>
                                 {/* badge for team members */}
-                                {projectData.teamMembers.map((member, index) => (
+                                {project?.teamMembers?.map((member, index) => (
                                     <a
                                         key={index}
                                         href={member.githubProfileUrl}
@@ -100,11 +108,11 @@ function ProjectDetailPage() {
                                 ))}
                             </Group>
 
-                            {projectData.githubRepoUrl && (
+                            {project.githubRepoUrl && (
                                 <Group align="center" spacing="xs">
                                     <Text>GitHub:</Text>
                                     <a
-                                        href={projectData.githubRepoUrl}
+                                        href={project.githubRepoUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         style={{ textDecoration: 'none' }}

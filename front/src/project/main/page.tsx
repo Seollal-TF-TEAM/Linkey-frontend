@@ -23,8 +23,11 @@ function ProjectPage() {
     const [opened, { open, close }] = useDisclosure(false);
     const location = useLocation();
     const navigate = useNavigate();
+    const baseUri = process.env.REACT_APP_BASE_URL;
     const [projects, setProjects] = useState([]);
+    const githubUserId = window.sessionStorage.getItem("githubUserId");
 
+    console.log()
     // 테스트 데이터
     const mockProjects = {
         projects: [
@@ -56,24 +59,20 @@ function ProjectPage() {
         ]
     };
 
-//     useEffect(() => {
-//         const fetchProjects = async () => {
-//             try {
-//                 const response = await fetch(`${baseUri}/project/projectList?githubUserId=${githubUserId}`);
-//                 const data = await response.json();
-//                 setProjects(data.projects || []); // 응답에서 projects 배열을 상태에 저장
-//             } catch (error) {
-//                 console.error('프로젝트 목록 불러오기 실패:', error);
-//             }
-//         };
-//
-//         fetchProjects();
-//     }, [githubUserId]);
-
-    // API 대신 테스트 데이터를 사용
+    // http://localhost:8080/api/projects/projectList?githubUserId=103468518
     useEffect(() => {
-        // 실제 API 호출 대신 mock 데이터를 설정
-        setProjects(mockProjects.projects);
+        const fetchProjects = async () => {
+            try {
+                const response = await fetch(`${baseUri}/projects/projectList?githubUserId=${githubUserId}`);
+                const data = await response.json();
+                const projects = data?.result?.data?.projects || [];
+                setProjects(projects);
+            } catch (error) {
+                console.error('프로젝트 목록 불러오기 실패:', error);
+            }
+        };
+
+        fetchProjects();
     }, []);
 
     const handleProjectClick = (projectId) => {
@@ -128,7 +127,8 @@ function ProjectPage() {
                                 <Button variant="transparent" color="dark" size="xl" onClick={open}>+</Button>
                             </Card>
 
-                            {projects.map((project) => (
+                            {/* {projectId: 1, projectName: 'Linkey', teamName: 'LinkeyTeam'} */}
+                            {projects.map((project: { projectId: any; projectName: any; teamName: any; }) => (
                                 <Card
                                     shadow="md"
                                     p="lg"
